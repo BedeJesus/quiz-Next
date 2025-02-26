@@ -34,7 +34,6 @@ export default function Register() {
 
 
                         <div className='radio'>
-
                             <div className='option'>
                                 <input type="radio" name='correct_answer' value={1} onChange={console.log('')} />
                                 <label htmlFor="option1">1</label>
@@ -42,17 +41,17 @@ export default function Register() {
 
                             <div className='option'>
                                 <input type="radio" name='correct_answer' value={2} onChange={console.log('')} />
-                                <label htmlFor="age1">2</label>
+                                <label htmlFor="option2">2</label>
                             </div>
 
                             <div className='option'>
                                 <input type="radio" name='correct_answer' value={3} onChange={console.log('')} />
-                                <label htmlFor="age1">3</label>
+                                <label htmlFor="option3">3</label>
                             </div >
 
                             <div className='option' >
                                 <input type="radio" name='correct_answer' value={4} onChange={console.log('')} />
-                                <label htmlFor="age1">4</label>
+                                <label htmlFor="option4">4</label>
                             </div>
                         </div>
 

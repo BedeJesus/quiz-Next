@@ -9,14 +9,6 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
 
-a {
-    font-size: 1.9em;
-    margin-top: 1%;
-    margin-left: 2%;
-    text-decoration: none;
-    color: black;
-}
-
 .register h1 {
     font-size: 2.3em;
     margin-bottom: 0.2em;
@@ -45,7 +37,7 @@ a {
 
 .register input[type=radio] {
 
-    margin-top: 2em;
+    margin: 2em 0.7em 0 0;
 }
 
 ::placeholder {
