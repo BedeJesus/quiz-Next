@@ -105,3 +105,27 @@ export const StyledLink = styled(Link)`
         transform: scale(0.9);
     }
 `
+
+export const Button = styled.button`
+    margin-top: 5%;
+    font-size: 1.5em;
+    transition: .3s;
+    background-color: #FACFCE;
+    border-radius: 10px;
+    color: black;
+    background: transparent;
+    transition: ease-out 1s;
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 black;
+
+    &:hover{
+        
+        color: white;
+        box-shadow: inset 0 -100px 0 0 black;
+    }
+
+    &:active{
+        transform: scale(0.9);
+    }
+`

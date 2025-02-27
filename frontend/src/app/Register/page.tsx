@@ -1,6 +1,6 @@
 "use client"
 
-import { Container, StyledLink } from './styles'
+import { Container, StyledLink, Button } from './styles'
 
 export default function Register() {
 
@@ -55,7 +55,7 @@ export default function Register() {
                             </div>
                         </div>
 
-                        <button type="submit">Cadastrar </button>
+                        <Button type="submit">Cadastrar </Button>
                     </form>
                 </div>
 
