@@ -13,10 +13,6 @@ export const Container = styled.div`
     font-size: 4em;
 }
 
- .buttons {
-    
-}
-
 a {
     text-decoration: none;
     color: #023535;
@@ -36,7 +32,6 @@ a:hover {
 
 }
 `  
-
 export const StyledLink = styled(Link)`
     display: flex;
     flex-direction: column;

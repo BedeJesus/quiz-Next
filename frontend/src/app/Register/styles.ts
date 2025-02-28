@@ -36,8 +36,9 @@ export const Container = styled.div`
 }
 
 .register input[type=radio] {
-
     margin: 2em 0.7em 0 0;
+    width: 1.1em;
+    height: 1.1em;
 }
 
 ::placeholder {
@@ -45,19 +46,6 @@ export const Container = styled.div`
     opacity: 1;
 }
 
-.register button {
-    margin-top: 5%;
-    font-size: 1.5em;
-    transition: .3s;
-    background-color: #FACFCE;
-    border-radius: 10px;
-}
-
-.register button:hover {
-    cursor: pointer;
-    background-color: #023535;
-    color: #FACFCE;
-}
 
 .register .radio {
     display: flex;
@@ -105,7 +93,6 @@ export const StyledLink = styled(Link)`
         transform: scale(0.9);
     }
 `
-
 export const Button = styled.button`
     margin-top: 5%;
     font-size: 1.5em;
@@ -114,10 +101,11 @@ export const Button = styled.button`
     border-radius: 10px;
     color: black;
     background: transparent;
-    transition: ease-out 1s;
+    transition: ease-out 0.5s;
     border: 2px solid black;
     border-radius: 10px;
     box-shadow: inset 0 0 0 0 black;
+    cursor: pointer;
 
     &:hover{
         

@@ -1,5 +1,4 @@
 import {Container, StyledLink} from './styles'
-// import Link from "next/link";
 
 export default function Home() {
     return (
