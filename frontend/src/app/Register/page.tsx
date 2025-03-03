@@ -16,7 +16,7 @@ export default function Register() {
 
                     <form onSubmit={console.log('teste')}>
                         <label>Questão:</label>
-                        <input type="text" placeholder="Digite sua questão" name='title' onChange={console.log('')} />
+                        <input type="text" placeholder="Digite sua questão" name='question' onChange={console.log('')} />
 
                         <label>Primeira resposta:</label>
                         <input type="text" placeholder="Digite a primeira resposta" name='first_answer' onChange={console.log('')} />
@@ -31,7 +31,6 @@ export default function Register() {
                         <input type="text" placeholder="Digite a quarta resposta" name='forth_answer' onChange={console.log('')} />
 
                         <label>Qual é a resposta correta?</label>
-
 
                         <div className='radio'>
                             <div className='option'>

@@ -98,6 +98,7 @@ export const Button = styled.button`
     font-size: 1.5em;
     transition: .3s;
     background-color: #FACFCE;
+    height: 1.5em;
     border-radius: 10px;
     color: black;
     background: transparent;
