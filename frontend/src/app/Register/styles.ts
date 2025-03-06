@@ -9,62 +9,57 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
 
-.register h1 {
-    font-size: 2.3em;
-    margin-bottom: 0.2em;
-}
-
-.register form {
+    .register h1 {
+        font-size: 2.3em;
+        margin-bottom: 0.2em;
+    }
+    
+    .register .radio {
+        display: flex;
+        justify-content: space-around;
+    }
+`
+export const Form = styled.form`
     display: flex;
     flex-direction: column;
     padding: 2%;
     border: solid 2px #023535;
     border-radius: 10px;
-}
 
-.register label {
-    font-size: 1.5em;
-}
+    label {
+        font-size: 1.5em;
+        margin-bottom: 0.3em;
+    }
+    
+    ::placeholder {
+        color: #023535;
+        opacity: 1;
+    }
 
-.register input[type=text] {
+    *:focus {
+        outline: none;
+    }
+`
+
+export const Input = styled.input`
     background-color: transparent;
     border-top: none;
     border-left: none;
     border-right: none;
     border-bottom: solid 2px #023535;
-    margin-bottom: 1.5em;
-}
+    margin-bottom: 1.2em; 
+    font-size: 1.2em;
+`
 
-.register input[type=radio] {
+export const InputRadio = styled.input`
     margin: 2em 0.7em 0 0;
     width: 1.1em;
     height: 1.1em;
-}
-
-::placeholder {
-    color: #023535;
-    opacity: 1;
-}
-
-
-.register .radio {
-    display: flex;
-    justify-content: space-around;
-}
-
-.register .radio input {
     cursor: pointer;
     accent-color: #023535;
     transform: scale(1.3);
-}
-
-
-*:focus {
-    outline: none;
-}
-
-
 `
+
 export const StyledLink = styled(Link)`
     display: flex;
     font-size: 1.5em;

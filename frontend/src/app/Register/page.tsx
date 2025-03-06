@@ -1,6 +1,6 @@
 "use client"
 
-import { Container, StyledLink, Button } from './styles'
+import { Container, StyledLink, Button, Form, Input, InputRadio } from './styles'
 
 export default function Register() {
 
@@ -14,48 +14,48 @@ export default function Register() {
 
                     <h1>Faça o cadastro de uma pergunta</h1>
 
-                    <form onSubmit={console.log('teste')}>
+                    <Form onSubmit={console.log('teste')}>
                         <label>Questão:</label>
-                        <input type="text" placeholder="Digite sua questão" name='question' onChange={console.log('')} />
+                        <Input type="text" placeholder="Digite sua questão" name='question' onChange={console.log('')} />
 
                         <label>Primeira resposta:</label>
-                        <input type="text" placeholder="Digite a primeira resposta" name='first_answer' onChange={console.log('')} />
+                        <Input type="text" placeholder="Digite a primeira resposta" name='first_answer' onChange={console.log('')} />
 
                         <label>Segunda resposta:</label>
-                        <input type="text" placeholder="Digite a segunda resposta" name='second_answer' onChange={console.log('')} />
+                        <Input type="text" placeholder="Digite a segunda resposta" name='second_answer' onChange={console.log('')} />
 
                         <label>Terceira resposta:</label>
-                        <input type="text" placeholder="Digite a terceira resposta" name='third_answer' onChange={console.log('')} />
+                        <Input type="text" placeholder="Digite a terceira resposta" name='third_answer' onChange={console.log('')} />
 
                         <label>Quarta resposta:</label>
-                        <input type="text" placeholder="Digite a quarta resposta" name='forth_answer' onChange={console.log('')} />
+                        <Input type="text" placeholder="Digite a quarta resposta" name='forth_answer' onChange={console.log('')} />
 
                         <label>Qual é a resposta correta?</label>
 
                         <div className='radio'>
                             <div className='option'>
-                                <input type="radio" name='correct_answer' value={1} onChange={console.log('')} />
+                                <InputRadio type="radio" name='correct_answer' value={1} onChange={console.log('')} />
                                 <label htmlFor="option1">1</label>
                             </div>
 
                             <div className='option'>
-                                <input type="radio" name='correct_answer' value={2} onChange={console.log('')} />
+                                <InputRadio type="radio" name='correct_answer' value={2} onChange={console.log('')} />
                                 <label htmlFor="option2">2</label>
                             </div>
 
                             <div className='option'>
-                                <input type="radio" name='correct_answer' value={3} onChange={console.log('')} />
+                                <InputRadio type="radio" name='correct_answer' value={3} onChange={console.log('')} />
                                 <label htmlFor="option3">3</label>
                             </div >
 
                             <div className='option' >
-                                <input type="radio" name='correct_answer' value={4} onChange={console.log('')} />
+                                <InputRadio type="radio" name='correct_answer' value={4} onChange={console.log('')} />
                                 <label htmlFor="option4">4</label>
                             </div>
                         </div>
 
                         <Button type="submit">Cadastrar </Button>
-                    </form>
+                    </Form>
                 </div>
 
             </Container>
@@ -64,4 +64,3 @@ export default function Register() {
     )
 
 }
-
