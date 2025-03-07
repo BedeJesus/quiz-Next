@@ -2,13 +2,19 @@ const Question = require('../models/Question')
 
 const ObjectId = require('mongoose').Types.ObjectId
 
-module.exports = class ItemController{
+module.exports = class ItemController {
 
     //create question
-    static async create(req,res){
-        const {title,first_answer,second_answer,third_answer,forth_answer,correct_answer} =req.body
+    static async create(req, res) {
+        const { group, title, first_answer, second_answer, third_answer, forth_answer, correct_answer } = req.body
 
         //validations
+
+        if (!group) {
+            res.status(422).json({ message: "Faltando Grupo" })
+            return
+        }
+
         if (!title) {
             res.status(422).json({ message: "Faltando Titulo" })
             return
@@ -40,6 +46,7 @@ module.exports = class ItemController{
         }
 
         const question = new Question({
+            group,
             title,
             first_answer,
             second_answer,
@@ -48,33 +55,33 @@ module.exports = class ItemController{
             correct_answer
         })
 
-        try{
+        try {
             const newQuestion = await question.save()
             res.status(201).json({
-                message:'Questão Cadastrada!',
+                message: 'Questão Cadastrada!',
                 newQuestion
             })
-        } catch(err){
-            res.status(500).json({message:err})
+        } catch (err) {
+            res.status(500).json({ message: err })
         }
     }
 
 
     //get all questions
 
-    static async getAll(req,res){
+    static async getAll(req, res) {
         const questions = await Question.find().sort('-createAt')
         res.status(200).json({
-            questions:questions
+            questions: questions
         })
     }
 
     //get ten questions
 
-    static async getTen(req,res){
-        const questions = await Question.aggregate([{$sample:{size:10}}])
+    static async getTen(req, res) {
+        const questions = await Question.aggregate([{ $sample: { size: 10 } }])
         res.status(200).json({
-            questions:questions
+            questions: questions
         })
     }
 
