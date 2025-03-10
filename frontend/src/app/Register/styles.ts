@@ -3,11 +3,11 @@ import styled from "styled-components";
 import Link from 'next/link'
 
 export const Container = styled.div`
-    height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: -2em; // MUDAR DEPOIS
 
     .register h1 {
         font-size: 2.3em;
@@ -51,13 +51,43 @@ export const Input = styled.input`
     font-size: 1.2em;
 `
 
-export const InputRadio = styled.input`
-    margin: 2em 0.7em 0 0;
-    width: 1.1em;
-    height: 1.1em;
-    cursor: pointer;
-    accent-color: #023535;
-    transform: scale(1.3);
+export const GroupName = styled.input`
+    font-size: 2.3em;
+    display: flex;
+    justify-self:center;
+    margin-bottom: 0.2em;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 2px #023535;
+    text-align: center;
+    outline: none;
+    width: 99%;
+
+    
+`
+
+export const ButtonsRadio = styled.button`
+    
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 1.8em;
+    width: 1.3em;
+    transition: ease-out 0.3s;
+    background-color: ${(props) => (props.selected ? 'black' : 'transparent')};  
+    color: ${(props) => (props.selected ? 'white' : 'black')}; 
+
+    &:hover{
+        
+        color: white;
+        box-shadow: inset 0 -100px 0 0 black;
+        cursor: pointer;
+    }
+
+    &:active{
+        transform: scale(0.9);
+    }
+
+    
 `
 
 export const StyledLink = styled(Link)`
@@ -65,7 +95,7 @@ export const StyledLink = styled(Link)`
     font-size: 1.5em;
     width: fit-content;
     border-radius: 10px;
-    margin: 1em;
+    margin: 1em 1em 0 1em;
     padding: 0.5em 1em;
     text-align: center;
     font-size: 18px;
@@ -103,6 +133,8 @@ export const Button = styled.button`
     box-shadow: inset 0 0 0 0 black;
     cursor: pointer;
 
+    width: 50%;
+
     &:hover{
         
         color: white;
@@ -112,4 +144,10 @@ export const Button = styled.button`
     &:active{
         transform: scale(0.9);
     }
+`
+
+export const Buttons = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 `

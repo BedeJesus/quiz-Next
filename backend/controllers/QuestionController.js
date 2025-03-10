@@ -8,59 +8,62 @@ module.exports = class ItemController {
     static async create(req, res) {
         const { group, title, first_answer, second_answer, third_answer, forth_answer, correct_answer } = req.body
 
-        //validations
+        const questions = req.body
 
-        if (!group) {
+        //validations
+        try {
+
+        if (questions.find(question => !question.group)) {
             res.status(422).json({ message: "Faltando Grupo" })
             return
         }
 
-        if (!title) {
+        if (questions.find(question => !question.title)) {
             res.status(422).json({ message: "Faltando Titulo" })
             return
         }
 
-        if (!first_answer) {
+        if (questions.find(question => !question.first_answer)) {
             res.status(422).json({ message: "Faltando primeira resposta" })
             return
         }
 
-        if (!second_answer) {
+        if (questions.find(question => !question.second_answer)) {
             res.status(422).json({ message: "Faltando segunda resposta" })
             return
         }
 
-        if (!third_answer) {
+        if (questions.find(question => !question.third_answer)) {
             res.status(422).json({ message: "Faltando terceira resposta" })
             return
         }
 
-        if (!forth_answer) {
+        if (questions.find(question => !question.forth_answer)) {
             res.status(422).json({ message: "Faltando quarta resposta" })
             return
         }
 
-        if (!correct_answer) {
+        if (questions.find(question => !question.correct_answer)) {
             res.status(422).json({ message: "Faltando resposta correta" })
             return
         }
 
-        const question = new Question({
-            group,
-            title,
-            first_answer,
-            second_answer,
-            third_answer,
-            forth_answer,
-            correct_answer
-        })
+        for (let i = 0; i < questions.length; i++) {
+            const { group, title } = questions[i]; 
+            
+            const existingQuestion = await Question.findOne({ group, title });
 
-        try {
-            const newQuestion = await question.save()
-            res.status(201).json({
-                message: 'Questão Cadastrada!',
-                newQuestion
-            })
+            if (existingQuestion) {
+                return res.status(422).json({ message: `A questão com título "${title}" já existe no grupo "${group}"` });
+            }
+        }
+
+        const savedQuestions = await Question.insertMany(questions);
+        return res.status(201).json({
+            message: 'Questões cadastradas com sucesso!',
+            savedQuestions
+        });
+    
         } catch (err) {
             res.status(500).json({ message: err })
         }

@@ -1,28 +1,53 @@
 "use client"
 import api from '@/utils/api'
-import { useState } from 'react'
-import { Container, StyledLink, Button, Form, Input, InputRadio } from './styles'
+import { useState, useEffect } from 'react'
+import { Container, StyledLink, Button, Form, Input, ButtonsRadio, GroupName, Buttons } from './styles'
 
 export default function Register() {
 
     const [question, setQuestion] = useState({})
+    const [group, setGroup] = useState('')
+    const [questions, setQuestions] = useState([])
+    const [questionCounter, setQuestionCounter] = useState(1)
     let msgType = 'success'
+
+    useEffect(() => {
+        setQuestion(questions[questionCounter - 1] || {});
+    }, [questionCounter]);
+
 
     function handleOnChange(e) {
         setQuestion({ ...question, [e.target.name]: e.target.value })
     }
 
     function handleSubmit(e) {
-        e.preventDefault()
-        registerQuestion(question)
-        console.log(question)
+        e.preventDefault();
+
+        let newQuestions = [...questions];
+        newQuestions[questionCounter - 1] = question;
+
+        setQuestions(newQuestions);
+
+        if (questionCounter === 10) {
+            console.log(newQuestions);
+            registerQuestions(questions)
+        } else {
+            setQuestionCounter(questionCounter + 1);
+        }
     }
 
-    async function registerQuestion(question) {
 
-        question.group = 'teste' //mudar depois
+    async function registerQuestions(questions) {
 
-        const data = await api.post('questions/create', question)
+        setQuestions(questions.map((question, index) => {
+            return {
+                ...question,
+                group: group,
+            }
+        }
+        ))
+
+        const data = await api.post('questions/create', questions)
             .then((response) => {
                 return response.data
             })
@@ -34,6 +59,10 @@ export default function Register() {
         window.alert(data.message)
     }
 
+    function handleAnswerClick(value) {
+        setQuestion({ ...question, correct_answer: value });
+    }
+
     return (
         <>
 
@@ -42,49 +71,52 @@ export default function Register() {
             <Container>
                 <div className="register">
 
-                    <h1>Faça o cadastro de uma pergunta</h1>
+                    <GroupName type="text" placeholder="Digite o nome do seu quiz" name='group' value={group} onChange={(e) => setGroup(e.target.value)} />
 
                     <Form onSubmit={handleSubmit}>
-                        <label>Questão:</label>
-                        <Input type="text" placeholder="Digite sua questão" name='title' onChange={handleOnChange} />
+                        <label>Questão {questionCounter}:</label>
+                        <Input type="text" placeholder="Digite sua questão" name='title' value={question.title || ""} onChange={handleOnChange} />
 
                         <label>Primeira resposta:</label>
-                        <Input type="text" placeholder="Digite a primeira resposta" name='first_answer' onChange={handleOnChange} />
+                        <Input type="text" placeholder="Digite a primeira resposta" name='first_answer' value={question.first_answer || ""} onChange={handleOnChange} />
 
                         <label>Segunda resposta:</label>
-                        <Input type="text" placeholder="Digite a segunda resposta" name='second_answer' onChange={handleOnChange} />
+                        <Input type="text" placeholder="Digite a segunda resposta" name='second_answer' value={question.second_answer || ""} onChange={handleOnChange} />
 
                         <label>Terceira resposta:</label>
-                        <Input type="text" placeholder="Digite a terceira resposta" name='third_answer' onChange={handleOnChange} />
+                        <Input type="text" placeholder="Digite a terceira resposta" name='third_answer' value={question.third_answer || ""} onChange={handleOnChange} />
 
                         <label>Quarta resposta:</label>
-                        <Input type="text" placeholder="Digite a quarta resposta" name='forth_answer' onChange={handleOnChange} />
+                        <Input type="text" placeholder="Digite a quarta resposta" name='forth_answer' value={question.forth_answer || ""} onChange={handleOnChange} />
 
                         <label>Qual é a resposta correta?</label>
 
                         <div className='radio'>
                             <div className='option'>
-                                <InputRadio type="radio" name='correct_answer' value={1} onChange={handleOnChange} />
-                                <label htmlFor="option1">1</label>
+                                <ButtonsRadio type="button" onClick={() => handleAnswerClick(1)} selected={question.correct_answer === 1}>1</ButtonsRadio>
                             </div>
 
                             <div className='option'>
-                                <InputRadio type="radio" name='correct_answer' value={2} onChange={handleOnChange} />
-                                <label htmlFor="option2">2</label>
+                            <ButtonsRadio type="button" onClick={() => handleAnswerClick(2)} selected={question.correct_answer === 2}>2</ButtonsRadio>
                             </div>
 
                             <div className='option'>
-                                <InputRadio type="radio" name='correct_answer' value={3} onChange={handleOnChange} />
-                                <label htmlFor="option3">3</label>
+                            <ButtonsRadio type="button" onClick={() => handleAnswerClick(3)} selected={question.correct_answer === 3}>3</ButtonsRadio>
                             </div >
 
                             <div className='option' >
-                                <InputRadio type="radio" name='correct_answer' value={4} onChange={handleOnChange} />
-                                <label htmlFor="option4">4</label>
+                            <ButtonsRadio type="button" onClick={() => handleAnswerClick(4)} selected={question.correct_answer === 4}>4</ButtonsRadio>
                             </div>
                         </div>
 
-                        <Button type="submit">Cadastrar </Button>
+                        <Buttons>
+                            {questionCounter > 1 ?
+                                <Button type="button" onClick={() => setQuestionCounter(questionCounter - 1)}>Pergunta Anterior</Button> : null
+                            }
+
+                            <Button type="submit">{questionCounter != 10 ? 'Próxima Pergunta' : 'Cadastrar'}</Button>
+                        </Buttons>
+
                     </Form>
                 </div>
 
