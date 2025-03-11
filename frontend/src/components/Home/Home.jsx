@@ -7,8 +7,8 @@ export default function Home() {
             <h1>Bem-vindo ao Quiz</h1>
 
             <div className="buttons">
-                <StyledLink href='/Quiz'>Iniciar Quiz</StyledLink>
-                <StyledLink href='/Register'>Cadastrar Questão</StyledLink>
+                <StyledLink href='/SelectQuiz'>Iniciar Quiz</StyledLink>
+                <StyledLink href='/Register'>Cadastrar Quiz</StyledLink>
             </div>
 
         </Container>

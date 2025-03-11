@@ -88,6 +88,15 @@ module.exports = class ItemController {
         })
     }
 
+    static async getQuizOptions(req, res) {
+        try {
+            const groups = await Question.distinct("group");
+            res.status(200).json({ groups });
+        } catch (err) {
+            res.status(500).json({ message: "Erro ao buscar os grupos", error: err });
+        }
+    }
+
 }
 
 

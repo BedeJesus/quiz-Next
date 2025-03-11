@@ -29,8 +29,7 @@ export default function Register() {
         setQuestions(newQuestions);
 
         if (questionCounter === 10) {
-            console.log(newQuestions);
-            registerQuestions(questions)
+            registerQuestions(newQuestions)
         } else {
             setQuestionCounter(questionCounter + 1);
         }
@@ -39,15 +38,12 @@ export default function Register() {
 
     async function registerQuestions(questions) {
 
-        setQuestions(questions.map((question, index) => {
-            return {
-                ...question,
-                group: group,
-            }
-        }
-        ))
+        const questionsWithGroup = questions.map(question => ({
+            ...question,
+            group: group,
+        }));
 
-        const data = await api.post('questions/create', questions)
+        const data = await api.post('questions/create', questionsWithGroup)
             .then((response) => {
                 return response.data
             })

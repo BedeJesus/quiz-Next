@@ -5,5 +5,6 @@ const QuestionController = require("../controllers/QuestionController")
 router.post('/create',QuestionController.create)
 router.get('/',QuestionController.getAll)
 router.get('/ten',QuestionController.getTen)
+router.get('/getQuizOptions',QuestionController.getQuizOptions)
 
 module.exports = router
