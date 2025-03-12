@@ -30,7 +30,7 @@ export default function SelectQuiz() {
     function handleSelectChange(value) {
         console.log("Valor selecionado:", value);
         setSelectedGroup(value);
-        setIsOpen(false);  // Fechar a lista após seleção
+        setIsOpen(false);  
     }
 
 

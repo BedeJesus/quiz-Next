@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import Link from "next/link";
 
 export const Container = styled.div`
   position: relative;
@@ -34,12 +34,14 @@ export const OptionList = styled.div`
   position: absolute;
   background-color: transparent;
   width: 100%;
-  display: ${props => (props.isOpen ? 'flex' : 'none')};
+  display: ${props => (props.open ? 'flex' : 'none')};
   flex-direction: column;
   border-radius: 5px;
   border: 2px solid black;
   border-radius: 10px;
   transition: ease-out 0.2s;
+  
+
 
 `;
 
@@ -57,3 +59,10 @@ export const Option = styled.div`
         cursor: pointer;
   }
 `;
+
+export const StyledLink = styled(Link)`
+
+  text-decoration: none;
+  color: black;
+
+`
