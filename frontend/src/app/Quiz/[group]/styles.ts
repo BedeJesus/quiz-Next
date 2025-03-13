@@ -112,6 +112,10 @@ text-align: center;
 export const Answers = styled.label`
 font-size: 1.5em;
 text-align: ${(props) => (props.which == 'qual' ? 'center' : null)}; 
+
+&.hover{
+    cursor: pointer;
+}
     
 `
 
@@ -131,11 +135,12 @@ export const ButtonsRadio = styled.button`
     
     border: 2px solid black;
     border-radius: 10px;
-    font-size: 1.8em;
+    font-size: 1.3em;
     width: 1.3em;
     transition: ease-out 0.3s;
     background-color: ${(props) => (props.selected ? 'black' : 'transparent')};  
     color: ${(props) => (props.selected ? 'white' : 'black')}; 
+    margin-right: 0.2em;
 
     &:hover{
         

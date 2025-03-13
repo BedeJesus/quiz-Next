@@ -82,7 +82,8 @@ module.exports = class ItemController {
     //get ten questions
 
     static async getTen(req, res) {
-        const questions = await Question.aggregate([{ $sample: { size: 10 } }])
+        let group = req.params.group? group : null
+        const questions = group ?  Question.find({ group }) : await Question.aggregate([{ $sample: { size: 10 } }])
         res.status(200).json({
             questions: questions
         })

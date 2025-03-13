@@ -12,11 +12,10 @@ export default function QuizPage() {
     const [questions, setQuestions] = useState([])
     const [count, setCount] = useState(0)
     const [score, setScore] = useState(0)
-    const [answer, setAnswer] = useState(0)
-    const [questionCounter, setQuestionCounter] = useState(1)
+    const [answers, setAnswers] = useState([])
 
     useEffect(() => {
-        api.get('/questions/ten').then((response) => {
+        api.get('/questions/ten', group).then((response) => {
             setQuestions(response.data.questions)
         })
     }, [])
@@ -24,8 +23,10 @@ export default function QuizPage() {
     function handleSubmit(e) {
         e.preventDefault()
 
-        if (answer == questions[count].correct_answer) {
+        if (answers[count] == questions[count].correct_answer) {
             setScore(state => state + 1)
+        } else{
+            setScore(state => state - 1)
         }
 
         setCount(state => state + 1)
@@ -47,7 +48,10 @@ export default function QuizPage() {
     }
 
     function handleAnswerClick(value) {
-        setAnswer(value);
+
+        let newAnswer = [...answers];
+        newAnswer[count] = value;
+        setAnswers(newAnswer);
     }
 
     return (
@@ -66,40 +70,31 @@ export default function QuizPage() {
                             <Form onSubmit={handleSubmit}>
                                 <Title>{questions[count].title}</Title>
 
-                                <Answers>1- {questions[count].first_answer}</Answers>
+                                <Answers>
+                                    <ButtonsRadio type="button" onClick={() => handleAnswerClick(1)} selected={answers[count] === 1}>1</ButtonsRadio>
+                                    {questions[count].first_answer}
+                                </Answers>
 
-                                <Answers>2- {questions[count].second_answer}</Answers>
+                                <Answers> 
+                                    <ButtonsRadio type="button" onClick={() => handleAnswerClick(2)} selected={answers[count]  === 2}>2</ButtonsRadio>
+                                 {questions[count].second_answer}</Answers>
 
-                                <Answers>3- {questions[count].third_answer}</Answers>
+                                 <Answers>
+                                    <ButtonsRadio type="button" onClick={() => handleAnswerClick(3)} selected={answers[count]  === 3}>3</ButtonsRadio>
+                                    {questions[count].third_answer}
+                                </Answers>
 
-                                <Answers>4- {questions[count].forth_answer}</Answers>
-
-                                <Answers which= {'qual'}>Qual resposta é a correta?</Answers>
-
-                                <div className='radio'>
-                                    <div className='option'>
-                                        <ButtonsRadio type="button" onClick={() => handleAnswerClick(1)} selected={answer === 1}>1</ButtonsRadio>
-                                    </div>
-
-                                    <div className='option'>
-                                        <ButtonsRadio type="button" onClick={() => handleAnswerClick(2)} selected={answer === 2}>2</ButtonsRadio>
-                                    </div>
-
-                                    <div className='option'>
-                                        <ButtonsRadio type="button" onClick={() => handleAnswerClick(3)} selected={answer === 3}>3</ButtonsRadio>
-                                    </div >
-
-                                    <div className='option' >
-                                        <ButtonsRadio type="button" onClick={() => handleAnswerClick(4)} selected={answer === 4}>4</ButtonsRadio>
-                                    </div>
-                                </div>
+                                <Answers>
+                                    <ButtonsRadio type="button" onClick={() => handleAnswerClick(4)} selected={answers[count]  === 4}>4</ButtonsRadio>
+                                    {questions[count].forth_answer}
+                                </Answers>
 
                                 <Buttons>
-                                    {questionCounter > 1 ?
-                                        <Button type="button" onClick={() => setQuestionCounter(questionCounter - 1)}>Pergunta Anterior</Button> : null
+                                    {count > 0 ?
+                                        <Button type="button" onClick={() => setCount(count - 1)}>Pergunta Anterior</Button> : null
                                     }
 
-                                    <Button type="submit">{questionCounter != 10 ? 'Próxima Pergunta' : 'Responder'}</Button>
+                                    <Button type="submit">{count != 10 ? 'Próxima Pergunta' : 'Responder'}</Button>
                                 </Buttons>
                             </Form>
                         </>
