@@ -7,28 +7,19 @@ export const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    align-items: center;
+    height: 100vh;
+    justify-content: center;
 
 .radio {
     display: flex;
     justify-content: space-around;
 }
-
-.result a:hover{
-    background-color: #023535;
-    color:#FACFCE ;
-
-}
-
-
-.result h2{
-    background-color: transparent;
-}
-
 `
 
 export const StyledLink = styled(Link)`
-    display: flex;
+    position: absolute;
+    top: 20px;
+    left: 20px;
     font-size: 1.5em;
     width: fit-content;
     border-radius: 10px;
@@ -65,6 +56,7 @@ export const Form = styled.form`
     width: 35em;
     height: 30em;
     justify-content: space-between;
+    justify-self: center;
     
     ::placeholder {
         color: #023535;
@@ -152,6 +144,25 @@ export const ButtonsRadio = styled.button`
     &:active{
         transform: scale(0.9);
     }
+`
 
-    
+export const Result = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 25em;
+    align-items: center;
+    text-align: center;
+    padding: 2%;
+    border: solid 2px black;
+    border-radius: 10px;
+`
+
+export const LoaderDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    background-color: #FACFCE;
 `

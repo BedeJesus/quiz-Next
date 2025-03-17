@@ -2,8 +2,8 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from 'react'
 import api from "@/utils/api";
-import Link from "next/link";
-import { Container, StyledLink, Form, Button, Question, Answers, Title, Buttons, ButtonsRadio } from './styles'
+import { Container, LoaderDiv, StyledLink, Form, Button, Question, Answers, Title, Buttons, ButtonsRadio, Result } from './styles'
+import Loader from '../../../components/Loader/Loader';
 
 export default function QuizPage() {
     const params = useParams();
@@ -25,7 +25,7 @@ export default function QuizPage() {
 
         if (answers[count] == questions[count].correct_answer) {
             setScore(state => state + 1)
-        } else{
+        } else {
             setScore(state => state - 1)
         }
 
@@ -37,13 +37,13 @@ export default function QuizPage() {
         if (score <= 2) {
             return 'Vamos fingir que não aconteceu...'
         } else if (score <= 4) {
-            return 'Da pra melhorar isso aí!'
+            return 'Vamos melhorar isso aí!'
         } else if (score <= 6) {
-            return 'Ok né ta na média'
+            return 'Ok Ok, está bom!'
         } else if (score <= 8) {
             return 'Mandou bem!'
         } else if (score > 8) {
-            return 'Parabéns nerdão!'
+            return 'Parabéns!!!'
         }
     }
 
@@ -56,76 +56,70 @@ export default function QuizPage() {
 
     return (
 
-        <>
+        <Container>
             <StyledLink href='/'>Voltar</StyledLink>
-            <Container>
 
-                <div className="question">
 
-                    {questions.length === 10 && count <= 9 &&
+            <div className="question">
 
-                        <>
+                {questions.length === 10 && count <= 9 &&
 
-                            <Question>Questão {count + 1}</Question>
-                            <Form onSubmit={handleSubmit}>
-                                <Title>{questions[count].title}</Title>
+                    <>
 
-                                <Answers>
-                                    <ButtonsRadio type="button" onClick={() => handleAnswerClick(1)} selected={answers[count] === 1}>1</ButtonsRadio>
-                                    {questions[count].first_answer}
-                                </Answers>
+                        <Question>Questão {count + 1}</Question>
+                        <Form onSubmit={handleSubmit}>
+                            <Title>{questions[count].title}</Title>
 
-                                <Answers> 
-                                    <ButtonsRadio type="button" onClick={() => handleAnswerClick(2)} selected={answers[count]  === 2}>2</ButtonsRadio>
-                                 {questions[count].second_answer}</Answers>
+                            <Answers>
+                                <ButtonsRadio type="button" onClick={() => handleAnswerClick(1)} selected={answers[count] === 1}>1</ButtonsRadio>
+                                {questions[count].first_answer}
+                            </Answers>
 
-                                 <Answers>
-                                    <ButtonsRadio type="button" onClick={() => handleAnswerClick(3)} selected={answers[count]  === 3}>3</ButtonsRadio>
-                                    {questions[count].third_answer}
-                                </Answers>
+                            <Answers>
+                                <ButtonsRadio type="button" onClick={() => handleAnswerClick(2)} selected={answers[count] === 2}>2</ButtonsRadio>
+                                {questions[count].second_answer}</Answers>
 
-                                <Answers>
-                                    <ButtonsRadio type="button" onClick={() => handleAnswerClick(4)} selected={answers[count]  === 4}>4</ButtonsRadio>
-                                    {questions[count].forth_answer}
-                                </Answers>
+                            <Answers>
+                                <ButtonsRadio type="button" onClick={() => handleAnswerClick(3)} selected={answers[count] === 3}>3</ButtonsRadio>
+                                {questions[count].third_answer}
+                            </Answers>
 
-                                <Buttons>
-                                    {count > 0 ?
-                                        <Button type="button" onClick={() => setCount(count - 1)}>Pergunta Anterior</Button> : null
-                                    }
+                            <Answers>
+                                <ButtonsRadio type="button" onClick={() => handleAnswerClick(4)} selected={answers[count] === 4}>4</ButtonsRadio>
+                                {questions[count].forth_answer}
+                            </Answers>
 
-                                    <Button type="submit">{count != 10 ? 'Próxima Pergunta' : 'Responder'}</Button>
-                                </Buttons>
-                            </Form>
-                        </>
+                            <Buttons>
+                                {count > 0 ?
+                                    <Button type="button" onClick={() => setCount(count - 1)}>Pergunta Anterior</Button> : null
+                                }
 
-                    }
+                                <Button type="submit">{count != 9 ? 'Próxima Pergunta' : 'Responder'}</Button>
+                            </Buttons>
+                        </Form>
+                    </>
 
-                    {questions.length < 10 && (
-                        <div className='no_questions'>
-                            <h1>Não há questões cadastradas!</h1>
-                            <h2>Cadastre pelo menos 10 questões para fazer o quiz</h2>
-                        </div>
+                }
 
-                    )}
+                {questions.length < 10 && (
+                        <Loader />
+                )}
 
-                    {count === 10 && (
-                        <div className="result">
-                            <h1>O seu resultado foi..</h1>
+                {count === 10 && (
+                    <Result>
+                        <h1>O seu resultado foi..</h1>
 
-                            <h1>{score} pontos!</h1>
-                            <h2>{Message()}</h2>
+                        <h1>{score} pontos!</h1>
+                        <h2>{Message()}</h2>
 
-                            <Link href='/'>Voltar ao Menu</Link>
-                        </div>
-                    )
+                        <StyledLink href='/'>Voltar ao Menu</StyledLink>
+                    </Result>
+                )
 
-                    }
+                }
 
-                </div>
-            </Container>
-
-        </>
+            </div>
+        </Container>
 
     )
 }
