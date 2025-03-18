@@ -25,9 +25,7 @@ export default function QuizPage() {
 
         if (answers[count] == questions[count].correct_answer) {
             setScore(state => state + 1)
-        } else {
-            setScore(state => state - 1)
-        }
+        } 
 
         setCount(state => state + 1)
     }
@@ -37,7 +35,7 @@ export default function QuizPage() {
         if (score <= 2) {
             return 'Vamos fingir que não aconteceu...'
         } else if (score <= 4) {
-            return 'Vamos melhorar isso aí!'
+            return 'Vamos melhorar!'
         } else if (score <= 6) {
             return 'Ok Ok, está bom!'
         } else if (score <= 8) {
@@ -112,7 +110,6 @@ export default function QuizPage() {
                         <h1>{score} pontos!</h1>
                         <h2>{Message()}</h2>
 
-                        <StyledLink href='/'>Voltar ao Menu</StyledLink>
                     </Result>
                 )
 

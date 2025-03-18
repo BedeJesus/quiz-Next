@@ -151,11 +151,13 @@ export const Result = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
     height: 25em;
-    align-items: center;
     text-align: center;
     padding: 2%;
     border: solid 2px black;
     border-radius: 10px;
+    width: fit-content;
+    justify-self: center;
+
 `
 
 export const LoaderDiv = styled.div`
