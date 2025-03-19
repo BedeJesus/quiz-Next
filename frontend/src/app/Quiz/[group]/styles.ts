@@ -14,6 +14,15 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-around;
 }
+
+
+.question{
+
+    @media (max-width: 600px) {  
+        /* background-color: blue; */
+        margin-top: 3em;
+    }
+}
 `
 
 export const StyledLink = styled(Link)`
@@ -23,7 +32,6 @@ export const StyledLink = styled(Link)`
     font-size: 1.5em;
     width: fit-content;
     border-radius: 10px;
-    margin: 1em 1em 0 1em;
     padding: 0.5em 1em;
     text-align: center;
     font-size: 18px;
@@ -35,7 +43,6 @@ export const StyledLink = styled(Link)`
     border: 2px solid black;
     border-radius: 10px;
     box-shadow: inset 0 0 0 0 black;
-
     &:hover{
         
         color: white;
@@ -57,6 +64,13 @@ export const Form = styled.form`
     height: 30em;
     justify-content: space-between;
     justify-self: center;
+
+    @media (max-width: 600px) {  
+        width: 20em;
+        height: 35em;
+    }
+
+    
     
     ::placeholder {
         color: #023535;
@@ -66,6 +80,8 @@ export const Form = styled.form`
     *:focus {
         outline: none;
     }
+
+    
 `
 
 export const Button = styled.button`
@@ -83,7 +99,7 @@ export const Button = styled.button`
     box-shadow: inset 0 0 0 0 black;
     cursor: pointer;
 
-    width: 50%;
+    width: 15em;
 
     &:hover{
         
@@ -97,23 +113,23 @@ export const Button = styled.button`
 `
 
 export const Question = styled.h1`
-text-align: center;
+    text-align: center;
     
 `
 
 export const Answers = styled.label`
-font-size: 1.5em;
-text-align: ${(props) => (props.which == 'qual' ? 'center' : null)}; 
+    font-size: 1.5em;
+    text-align: ${(props) => (props.which == 'qual' ? 'center' : null)}; 
 
-&.hover{
-    cursor: pointer;
-}
+    &.hover{
+        cursor: pointer;
+    }
     
 `
 
 export const Title = styled.label`
-font-size: 2em;
-text-align: center;
+    font-size: 2em;
+    text-align: center;
     
 `
 
@@ -157,6 +173,11 @@ export const Result = styled.div`
     border-radius: 10px;
     width: fit-content;
     justify-self: center;
+
+    @media (max-width: 600px) {  
+        width: 20em;
+        height: 35em;
+    }
 
 `
 

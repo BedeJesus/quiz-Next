@@ -9,36 +9,17 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
 
-    h1 {
+h1 {
     font-size: 4em;
-}
-
-a {
-    text-decoration: none;
-    color: #023535;
-    padding-right: 4.5em;
-    padding-left: 4.5em;
-    font-size: 1.8em;
-    margin-bottom: 2%;
-    border: solid 2px black;
-    border-radius: 10px;
     text-align: center;
-    transition: .3s;
-}
+}   
 
-a:hover {
-    background-color: #023535;
-    color: #FACFCE;
-
-}
 `  
 export const StyledLink = styled(Link)`
     display: flex;
     flex-direction: column;
     text-decoration: none;
     color: #023535;
-    padding-right: 4.5em;
-    padding-left: 4.5em;
     font-size: 1.8em;
     margin-bottom: 2%;
     border: solid 2px black;
@@ -50,6 +31,11 @@ export const StyledLink = styled(Link)`
     border: 2px solid black;
     border-radius: 10px;
     box-shadow: inset 0 0 0 0 black;
+    width:15em;
+
+    @media (max-width: 600px) {
+        width:10em;
+    }
 
     &:hover{
         

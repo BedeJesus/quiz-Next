@@ -2,7 +2,7 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from 'react'
 import api from "@/utils/api";
-import { Container, LoaderDiv, StyledLink, Form, Button, Question, Answers, Title, Buttons, ButtonsRadio, Result } from './styles'
+import { Container, StyledLink, Form, Button, Question, Answers, Title, Buttons, ButtonsRadio, Result } from './styles'
 import Loader from '../../../components/Loader/Loader';
 
 export default function QuizPage() {
@@ -89,10 +89,10 @@ export default function QuizPage() {
 
                             <Buttons>
                                 {count > 0 ?
-                                    <Button type="button" onClick={() => setCount(count - 1)}>Pergunta Anterior</Button> : null
+                                    <Button type="button" onClick={() => setCount(count - 1)}>Anterior</Button> : null
                                 }
 
-                                <Button type="submit">{count != 9 ? 'Próxima Pergunta' : 'Responder'}</Button>
+                                <Button type="submit">{count != 9 ? 'Próxima' : 'Responder'}</Button>
                             </Buttons>
                         </Form>
                     </>

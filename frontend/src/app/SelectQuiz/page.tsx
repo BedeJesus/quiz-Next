@@ -1,5 +1,5 @@
 "use client"
-import { Container, StyledLink, Option } from './styles'
+import { Container, StyledLink, BackToMenu } from './styles'
 import { useEffect, useState } from 'react';
 import api from '@/utils/api';
 import Select from '@/components/CustomSelect/CustomSelect';
@@ -30,19 +30,23 @@ export default function SelectQuiz() {
     function handleSelectChange(value) {
         console.log("Valor selecionado:", value);
         setSelectedGroup(value);
-        setIsOpen(false);  
+        setIsOpen(false);
     }
 
 
     return (
         <Container>
 
-            <h1>Selecione o modo de jogo</h1>
+            <BackToMenu href='/'>Voltar</BackToMenu>
 
-            <div className="buttons">
-                <StyledLink href={`/Quiz/${encodeURIComponent('random')}`} passHref>Perguntas Aleatórias</StyledLink>
-                <Select groups={groups} selectedGroup={selectedGroup} onSelect={handleSelectChange} />
-            </div>
+            <>
+                <h1>Selecione o modo de jogo</h1>
+
+                <div className="buttons">
+                    <StyledLink href={`/Quiz/${encodeURIComponent('random')}`} passHref>Perguntas Aleatórias</StyledLink>
+                    <Select groups={groups} selectedGroup={selectedGroup} onSelect={handleSelectChange} />
+                </div>
+            </>
 
         </Container>
     )

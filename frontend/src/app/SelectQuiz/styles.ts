@@ -9,8 +9,9 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
 
-    h1 {
+h1 {
     font-size: 4em;
+    text-align: center;
 }
 
 a:hover {
@@ -19,6 +20,36 @@ a:hover {
 
 }
 `  
+export const BackToMenu = styled(Link)`
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 1.5em;
+    width: fit-content;
+    border-radius: 10px;
+    padding: 0.5em 1em;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: black;
+    background: transparent;
+    transition: ease-out 0.5s;
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 black;
+
+    &:hover{
+        
+        color: white;
+        box-shadow: inset 0 -100px 0 0 black;
+    }
+
+    &:active{
+        transform: scale(0.9);
+    }
+`
+
 export const StyledLink = styled(Link)`
     display: flex;
     flex-direction: column;
@@ -35,8 +66,12 @@ export const StyledLink = styled(Link)`
     border: 2px solid black;
     border-radius: 10px;
     box-shadow: inset 0 0 0 0 black;
-
     width: 15em;
+
+    @media (max-width: 600px) {
+        width:10em;
+    }
+    
     &:hover{
         
         color: white;
