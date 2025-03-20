@@ -60,65 +60,63 @@ export default function Register() {
     }
 
     return (
-        <>
+        <Container>
 
             <StyledLink href='/'>Voltar</StyledLink>
 
-            <Container>
-                <div className="register">
 
-                    <GroupName type="text" placeholder="Digite o nome do seu quiz" name='group' value={group} onChange={(e) => setGroup(e.target.value)} />
+            <div className="register">
 
-                    <Form onSubmit={handleSubmit}>
-                        <label>Questão {questionCounter}:</label>
-                        <Input type="text" placeholder="Digite sua questão" name='title' value={question.title || ""} onChange={handleOnChange} />
+                <GroupName type="text" placeholder="Digite o título do Quiz" name='group' value={group} onChange={(e) => setGroup(e.target.value)} />
 
-                        <label>Primeira resposta:</label>
-                        <Input type="text" placeholder="Digite a primeira resposta" name='first_answer' value={question.first_answer || ""} onChange={handleOnChange} />
+                <Form onSubmit={handleSubmit}>
+                    <label>Questão {questionCounter}:</label>
+                    <Input type="text" placeholder="Digite sua questão" name='title' value={question.title || ""} onChange={handleOnChange} />
 
-                        <label>Segunda resposta:</label>
-                        <Input type="text" placeholder="Digite a segunda resposta" name='second_answer' value={question.second_answer || ""} onChange={handleOnChange} />
+                    <label>Primeira resposta:</label>
+                    <Input type="text" placeholder="Digite a primeira resposta" name='first_answer' value={question.first_answer || ""} onChange={handleOnChange} />
 
-                        <label>Terceira resposta:</label>
-                        <Input type="text" placeholder="Digite a terceira resposta" name='third_answer' value={question.third_answer || ""} onChange={handleOnChange} />
+                    <label>Segunda resposta:</label>
+                    <Input type="text" placeholder="Digite a segunda resposta" name='second_answer' value={question.second_answer || ""} onChange={handleOnChange} />
 
-                        <label>Quarta resposta:</label>
-                        <Input type="text" placeholder="Digite a quarta resposta" name='forth_answer' value={question.forth_answer || ""} onChange={handleOnChange} />
+                    <label>Terceira resposta:</label>
+                    <Input type="text" placeholder="Digite a terceira resposta" name='third_answer' value={question.third_answer || ""} onChange={handleOnChange} />
 
-                        <label>Qual é a resposta correta?</label>
+                    <label>Quarta resposta:</label>
+                    <Input type="text" placeholder="Digite a quarta resposta" name='forth_answer' value={question.forth_answer || ""} onChange={handleOnChange} />
 
-                        <div className='radio'>
-                            <div className='option'>
-                                <ButtonsRadio type="button" onClick={() => handleAnswerClick(1)} selected={question.correct_answer === 1}>1</ButtonsRadio>
-                            </div>
+                    <label>Qual é a resposta correta?</label>
 
-                            <div className='option'>
-                            <ButtonsRadio type="button" onClick={() => handleAnswerClick(2)} selected={question.correct_answer === 2}>2</ButtonsRadio>
-                            </div>
-
-                            <div className='option'>
-                            <ButtonsRadio type="button" onClick={() => handleAnswerClick(3)} selected={question.correct_answer === 3}>3</ButtonsRadio>
-                            </div >
-
-                            <div className='option' >
-                            <ButtonsRadio type="button" onClick={() => handleAnswerClick(4)} selected={question.correct_answer === 4}>4</ButtonsRadio>
-                            </div>
+                    <div className='radio'>
+                        <div className='option'>
+                            <ButtonsRadio type="button" onClick={() => handleAnswerClick(1)} selected={question.correct_answer === 1}>1</ButtonsRadio>
                         </div>
 
-                        <Buttons>
-                            {questionCounter > 1 ?
-                                <Button type="button" onClick={() => setQuestionCounter(questionCounter - 1)}>Pergunta Anterior</Button> : null
-                            }
+                        <div className='option'>
+                            <ButtonsRadio type="button" onClick={() => handleAnswerClick(2)} selected={question.correct_answer === 2}>2</ButtonsRadio>
+                        </div>
 
-                            <Button type="submit">{questionCounter != 10 ? 'Próxima Pergunta' : 'Cadastrar'}</Button>
-                        </Buttons>
+                        <div className='option'>
+                            <ButtonsRadio type="button" onClick={() => handleAnswerClick(3)} selected={question.correct_answer === 3}>3</ButtonsRadio>
+                        </div >
 
-                    </Form>
-                </div>
+                        <div className='option' >
+                            <ButtonsRadio type="button" onClick={() => handleAnswerClick(4)} selected={question.correct_answer === 4}>4</ButtonsRadio>
+                        </div>
+                    </div>
 
-            </Container>
+                    <Buttons>
+                        {questionCounter > 1 ?
+                            <Button type="button" onClick={() => setQuestionCounter(questionCounter - 1)}>Pergunta Anterior</Button> : null
+                        }
 
-        </>
+                        <Button type="submit">{questionCounter != 10 ? 'Próxima Pergunta' : 'Cadastrar'}</Button>
+                    </Buttons>
+
+                </Form>
+            </div>
+
+        </Container>
     )
 
 }

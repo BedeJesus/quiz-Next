@@ -7,7 +7,13 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: -2em; // MUDAR DEPOIS
+    height: 100vh;
+
+    .register{
+        @media (max-width: 600px) {  
+            margin-top: 11em;
+        }
+    }
 
     .register h1 {
         font-size: 2.3em;
@@ -25,6 +31,10 @@ export const Form = styled.form`
     padding: 2%;
     border: solid 2px #023535;
     border-radius: 10px;
+
+    @media (max-width: 600px) {  
+        margin: 0 10px 0 10px;
+    }
 
     label {
         font-size: 1.5em;
@@ -49,6 +59,10 @@ export const Input = styled.input`
     border-bottom: solid 2px #023535;
     margin-bottom: 1.2em; 
     font-size: 1.2em;
+
+    @media (max-width: 600px) {  
+        font-size: 1.5em;
+    }
 `
 
 export const GroupName = styled.input`
@@ -62,6 +76,12 @@ export const GroupName = styled.input`
     text-align: center;
     outline: none;
     width: 99%;
+
+    @media (max-width: 600px) {  
+        width: 93%
+    }
+
+    
 
     
 `
@@ -91,11 +111,12 @@ export const ButtonsRadio = styled.button`
 `
 
 export const StyledLink = styled(Link)`
-    display: flex;
+    position: absolute;
+    top: 20px;
+    left: 20px;
     font-size: 1.5em;
     width: fit-content;
     border-radius: 10px;
-    margin: 1em 1em 0 1em;
     padding: 0.5em 1em;
     text-align: center;
     font-size: 18px;
@@ -107,7 +128,6 @@ export const StyledLink = styled(Link)`
     border: 2px solid black;
     border-radius: 10px;
     box-shadow: inset 0 0 0 0 black;
-
     &:hover{
         
         color: white;
@@ -132,8 +152,12 @@ export const Button = styled.button`
     border-radius: 10px;
     box-shadow: inset 0 0 0 0 black;
     cursor: pointer;
-
     width: 50%;
+
+    @media (max-width: 600px) {  
+        height: 2.5em;
+    }
+
 
     &:hover{
         
