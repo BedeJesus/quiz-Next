@@ -12,6 +12,10 @@ export const Container = styled.div`
 h1 {
     font-size: 4em;
     text-align: center;
+
+    @media (max-width: 600px) {
+        margin-bottom: 0.2em ;
+    }
 }   
 
 `  
