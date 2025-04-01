@@ -29,7 +29,7 @@ export const CustomSelect = styled.div`
  }
 `;
 
-export const OptionList = styled.div`
+export const OptionList = styled.div<{open: boolean }>`
 
   position: absolute;
   background-color: transparent;

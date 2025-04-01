@@ -119,7 +119,6 @@ export const Question = styled.h1`
 
 export const Answers = styled.label`
     font-size: 1.5em;
-    text-align: ${(props) => (props.which == 'qual' ? 'center' : null)}; 
 
     &.hover{
         cursor: pointer;
@@ -139,7 +138,7 @@ export const Buttons = styled.div`
     justify-content: space-evenly;
 `
 
-export const ButtonsRadio = styled.button`
+export const ButtonsRadio = styled.button<{ selected: boolean }>`
     
     border: 2px solid black;
     border-radius: 10px;

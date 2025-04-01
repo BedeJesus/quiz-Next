@@ -4,28 +4,29 @@ import { useEffect, useState } from 'react'
 import api from "@/utils/api";
 import { Container, StyledLink, Form, Button, Question, Answers, Title, Buttons, ButtonsRadio, Result } from './styles'
 import Loader from '../../../components/Loader/Loader';
+import { Question as QuestionInterface } from '../../../interfaces/interfaces'
 
 export default function QuizPage() {
     const params = useParams();
-    const group = params.group;
+    const group = params.group
 
-    const [questions, setQuestions] = useState([])
-    const [count, setCount] = useState(0)
-    const [score, setScore] = useState(0)
-    const [answers, setAnswers] = useState([])
+    const [questions, setQuestions] = useState<QuestionInterface[]>([])
+    const [count, setCount] = useState<number>(0)
+    const [score, setScore] = useState<number>(0)
+    const [answers, setAnswers] = useState<number[]>([])
 
     useEffect(() => {
-        api.get('/questions/ten', group).then((response) => {
+        api.get('/questions/ten', { params: { group } }).then((response) => {
             setQuestions(response.data.questions)
         })
     }, [])
 
-    function handleSubmit(e) {
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
         if (answers[count] == questions[count].correct_answer) {
             setScore(state => state + 1)
-        } 
+        }
 
         setCount(state => state + 1)
     }
@@ -45,7 +46,7 @@ export default function QuizPage() {
         }
     }
 
-    function handleAnswerClick(value) {
+    function handleAnswerClick(value: number) {
 
         let newAnswer = [...answers];
         newAnswer[count] = value;
@@ -100,7 +101,7 @@ export default function QuizPage() {
                 }
 
                 {questions.length < 10 && (
-                        <Loader />
+                    <Loader />
                 )}
 
                 {count === 10 && (

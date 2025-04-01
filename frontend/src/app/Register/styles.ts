@@ -80,14 +80,10 @@ export const GroupName = styled.input`
     @media (max-width: 600px) {  
         width: 93%
     }
-
-    
-
     
 `
 
-export const ButtonsRadio = styled.button`
-    
+export const ButtonsRadio = styled.button<{ selected: boolean }>`
     border: 2px solid black;
     border-radius: 10px;
     font-size: 1.8em;

@@ -2,13 +2,22 @@
 import api from '@/utils/api'
 import { useState, useEffect } from 'react'
 import { Container, StyledLink, Button, Form, Input, ButtonsRadio, GroupName, Buttons } from './styles'
+import { Question } from '../../interfaces/interfaces'
 
 export default function Register() {
 
-    const [question, setQuestion] = useState({})
-    const [group, setGroup] = useState('')
-    const [questions, setQuestions] = useState([])
-    const [questionCounter, setQuestionCounter] = useState(1)
+    const [question, setQuestion] = useState<Question>({
+        title: '',
+        first_answer: '',
+        second_answer: '',
+        third_answer: '',
+        forth_answer: '',
+        correct_answer: 0
+    });
+
+    const [group, setGroup] = useState<string>('')
+    const [questions, setQuestions] = useState<Question[]>([])
+    const [questionCounter, setQuestionCounter] = useState<number>(1)
     let msgType = 'success'
 
     useEffect(() => {
@@ -16,11 +25,11 @@ export default function Register() {
     }, [questionCounter]);
 
 
-    function handleOnChange(e) {
+    function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
         setQuestion({ ...question, [e.target.name]: e.target.value })
     }
 
-    function handleSubmit(e) {
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
         let newQuestions = [...questions];
@@ -36,7 +45,7 @@ export default function Register() {
     }
 
 
-    async function registerQuestions(questions) {
+    async function registerQuestions(questions:Question[]): Promise<void> {
 
         const questionsWithGroup = questions.map(question => ({
             ...question,
@@ -52,11 +61,11 @@ export default function Register() {
                 return err.response.data
             })
 
-        window.alert(data.message)
+        window.alert(data.message)  
     }
 
-    function handleAnswerClick(value) {
-        setQuestion({ ...question, correct_answer: value });
+    function handleAnswerClick(value: number):void {
+        setQuestion(prevState => ({ ...prevState, correct_answer: value }));
     }
 
     return (

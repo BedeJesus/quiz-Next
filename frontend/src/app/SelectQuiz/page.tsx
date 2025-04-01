@@ -4,18 +4,23 @@ import { useEffect, useState } from 'react';
 import api from '@/utils/api';
 import Select from '@/components/CustomSelect/CustomSelect';
 
+interface Group {
+    id: string;
+    name: string;
+}
+
 export default function SelectQuiz() {
 
-    const [groups, setGroups] = useState([]);
-    const [selectedGroup, setSelectedGroup] = useState('');
-    const [isOpen, setIsOpen] = useState(false);
+    const [groups, setGroups] = useState<Group[]>([]);
+    const [selectedGroup, setSelectedGroup] = useState<string>('');
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     useEffect(() => {
         getQuizOptions();
     }, []);
 
-    async function getQuizOptions() {
-        const data = await api.get('questions/getQuizOptions')
+    async function getQuizOptions(): Promise<void> {
+        const data = await api.get<{groups: Group[]}>('questions/getQuizOptions')
             .then((response) => {
                 setGroups(response.data.groups)
 
@@ -27,7 +32,7 @@ export default function SelectQuiz() {
 
     }
 
-    function handleSelectChange(value) {
+    function handleSelectChange(value: string): void {
         console.log("Valor selecionado:", value);
         setSelectedGroup(value);
         setIsOpen(false);
