@@ -1,7 +1,7 @@
-const mongoose = require('../db/conn')
-const { Schema } = mongoose
+const mongooseSchema = require('../db/conn')
+const { Schema } = mongooseSchema
 
-const Question = mongoose.model('Question', new Schema({
+const Question = mongooseSchema.model('Question', new Schema({
     group: {
         type: String,
         required: true
