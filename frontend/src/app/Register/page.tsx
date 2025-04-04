@@ -11,7 +11,7 @@ export default function Register() {
         first_answer: '',
         second_answer: '',
         third_answer: '',
-        forth_answer: '',
+        fourth_answer: '',
         correct_answer: 0
     });
 
@@ -92,7 +92,7 @@ export default function Register() {
                     <Input type="text" placeholder="Digite a terceira resposta" name='third_answer' value={question.third_answer || ""} onChange={handleOnChange} />
 
                     <label>Quarta resposta:</label>
-                    <Input type="text" placeholder="Digite a quarta resposta" name='forth_answer' value={question.forth_answer || ""} onChange={handleOnChange} />
+                    <Input type="text" placeholder="Digite a quarta resposta" name='fourth_answer' value={question.fourth_answer || ""} onChange={handleOnChange} />
 
                     <label>Qual é a resposta correta?</label>
 

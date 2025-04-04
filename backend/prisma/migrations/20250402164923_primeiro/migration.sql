@@ -16,3 +16,7 @@ CREATE TABLE "questions" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "questions_title_key" ON "questions"("title");
+
+
+ALTER TABLE "questions" RENAME COLUMN "firsrtAnswer" TO "firstAnswer";
+ALTER TABLE "questions" RENAME COLUMN "CorectAnswer" TO "correctAnswer";

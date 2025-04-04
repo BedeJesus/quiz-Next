@@ -3,6 +3,6 @@ export interface Question {
     first_answer: string;
     second_answer: string;
     third_answer: string;
-    forth_answer: string;
+    fourth_answer: string;
     correct_answer: number;
 }
