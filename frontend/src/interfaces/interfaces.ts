@@ -1,8 +1,8 @@
 export interface Question {
     title: string;
-    first_answer: string;
-    second_answer: string;
-    third_answer: string;
-    fourth_answer: string;
-    correct_answer: number;
+    firstAnswer: string;
+    secondAnswer: string;
+    thirdAnswer: string;
+    fourthAnswer: string;
+    correctAnswer: number;
 }

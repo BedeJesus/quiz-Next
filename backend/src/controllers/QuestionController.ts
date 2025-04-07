@@ -1,4 +1,3 @@
-const QuestionModel = require('../models/Question')
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient()
@@ -74,10 +73,8 @@ export default class QuestionController {
         
         const questions = group ? await prisma.question.findMany({
             where: { group },
-            orderBy: { createdAt: 'desc' },
             take: 10
         }) : await prisma.question.findMany({
-            orderBy: { createdAt: 'desc' },
             take: 10
         });
         res.status(200).json({
@@ -92,7 +89,7 @@ export default class QuestionController {
                 distinct: ['group']
             });
 
-            let groups = groupsResult .map(g => g.group);
+            let groups = groupsResult.map(g => g.group);
             res.status(200).json({ groups });
         } catch (err) {
             res.status(500).json({ message: "Erro ao buscar os grupos", error: err });

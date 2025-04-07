@@ -24,9 +24,10 @@ export default function QuizPage() {
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
-        if (answers[count] == questions[count].correct_answer) {
+        if (answers[count] == questions[count].correctAnswer) {
             setScore(state => state + 1)
         }
+
 
         setCount(state => state + 1)
     }
@@ -71,21 +72,21 @@ export default function QuizPage() {
 
                             <Answers>
                                 <ButtonsRadio type="button" onClick={() => handleAnswerClick(1)} selected={answers[count] === 1}>1</ButtonsRadio>
-                                {questions[count].first_answer}
+                                {questions[count].firstAnswer}
                             </Answers>
 
                             <Answers>
                                 <ButtonsRadio type="button" onClick={() => handleAnswerClick(2)} selected={answers[count] === 2}>2</ButtonsRadio>
-                                {questions[count].second_answer}</Answers>
+                                {questions[count].secondAnswer}</Answers>
 
                             <Answers>
                                 <ButtonsRadio type="button" onClick={() => handleAnswerClick(3)} selected={answers[count] === 3}>3</ButtonsRadio>
-                                {questions[count].third_answer}
+                                {questions[count].thirdAnswer}
                             </Answers>
 
                             <Answers>
                                 <ButtonsRadio type="button" onClick={() => handleAnswerClick(4)} selected={answers[count] === 4}>4</ButtonsRadio>
-                                {questions[count].forth_answer}
+                                {questions[count].fourthAnswer}
                             </Answers>
 
                             <Buttons>
@@ -108,7 +109,9 @@ export default function QuizPage() {
                     <Result>
                         <h1>O seu resultado foi..</h1>
 
-                        <h1>{score} pontos!</h1>
+                        {score == 1 ? <h1>{score} ponto!</h1> : <h1>{score} pontos!</h1>}
+
+
                         <h2>{Message()}</h2>
 
                     </Result>
