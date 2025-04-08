@@ -5,11 +5,12 @@ import api from "@/utils/api";
 import { Container, StyledLink, Form, Button, Question, Answers, Title, Buttons, ButtonsRadio, Result } from './styles'
 import Loader from '../../../components/Loader/Loader';
 import { Question as QuestionInterface } from '../../../interfaces/interfaces'
+import { ToastContainer, toast, Bounce } from 'react-toastify';
+
 
 export default function QuizPage() {
     const params = useParams();
     const group = params.group
-
     const [questions, setQuestions] = useState<QuestionInterface[]>([])
     const [count, setCount] = useState<number>(0)
     const [score, setScore] = useState<number>(0)
@@ -18,7 +19,20 @@ export default function QuizPage() {
     useEffect(() => {
         api.get('/questions/ten', { params: { group } }).then((response) => {
             setQuestions(response.data.questions)
+        }).catch((error) => {
+            toast.error('Erro ao carregar as perguntas', {
+                position: "top-center",
+                autoClose: 4000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            })
         })
+
     }, [])
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -27,7 +41,6 @@ export default function QuizPage() {
         if (answers[count] == questions[count].correctAnswer) {
             setScore(state => state + 1)
         }
-
 
         setCount(state => state + 1)
     }
@@ -59,6 +72,7 @@ export default function QuizPage() {
         <Container>
             <StyledLink href='/'>Voltar</StyledLink>
 
+            <ToastContainer />
 
             <div className="question">
 
@@ -110,7 +124,6 @@ export default function QuizPage() {
                         <h1>O seu resultado foi..</h1>
 
                         {score == 1 ? <h1>{score} ponto!</h1> : <h1>{score} pontos!</h1>}
-
 
                         <h2>{Message()}</h2>
 
