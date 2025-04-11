@@ -29,24 +29,19 @@ export default function Register() {
         setQuestion({ ...question, [e.target.name]: e.target.value })
     }
 
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-
-        let newQuestions = [...questions];
+    function handleRegisterQuestion(e?: React.FormEvent) {
+        if (e) e.preventDefault();
+    
+        const newQuestions = [...questions];
         newQuestions[questionCounter - 1] = question;
-
+    
         setQuestions(newQuestions);
-
-        if (questionCounter === 10) {
-            registerQuestions(newQuestions)
-        } else {
-            setQuestionCounter(questionCounter + 1);
-        }
+        setQuestionCounter(questionCounter + 1);
     }
+    
 
-
-    async function registerQuestions(questions: Question[]): Promise<void> {
-
+    async function registerQuestions(questions: Question[], e: React.FormEvent) {
+        e.preventDefault();
         const questionsWithGroup = questions.map(question => ({
             ...question,
             group: group,
@@ -63,7 +58,7 @@ export default function Register() {
                             return data.response.data.message
                         }
                         return 'Erro ao criar o quiz!'
-                    },                    
+                    },
                 }
             },
             {
@@ -75,7 +70,7 @@ export default function Register() {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-                transition: Bounce,   
+                transition: Bounce,
             }
 
         );
@@ -92,24 +87,25 @@ export default function Register() {
 
             <ToastContainer />
 
+
             <div className="register">
 
                 <GroupName type="text" placeholder="Digite o título do Quiz" name='group' value={group} onChange={(e) => setGroup(e.target.value)} />
 
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={(e) => registerQuestions(questions, e)}>
                     <label>Questão {questionCounter}:</label>
                     <Input type="text" placeholder="Digite sua questão" name='title' value={question.title || ""} onChange={handleOnChange} />
 
-                    <label>Primeira resposta:</label>
+                    {/* <label>Primeira resposta:</label> */}
                     <Input type="text" placeholder="Digite a primeira resposta" name='firstAnswer' value={question.firstAnswer || ""} onChange={handleOnChange} />
 
-                    <label>Segunda resposta:</label>
+                    {/* <label>Segunda resposta:</label> */}
                     <Input type="text" placeholder="Digite a segunda resposta" name='secondAnswer' value={question.secondAnswer || ""} onChange={handleOnChange} />
 
-                    <label>Terceira resposta:</label>
+                    {/* <label>Terceira resposta:</label> */}
                     <Input type="text" placeholder="Digite a terceira resposta" name='thirdAnswer' value={question.thirdAnswer || ""} onChange={handleOnChange} />
 
-                    <label>Quarta resposta:</label>
+                    {/* <label>Quarta resposta:</label> */}
                     <Input type="text" placeholder="Digite a quarta resposta" name='fourthAnswer' value={question.fourthAnswer || ""} onChange={handleOnChange} />
 
                     <label>Qual é a resposta correta?</label>
@@ -134,11 +130,13 @@ export default function Register() {
 
                     <Buttons>
                         {questionCounter > 1 ?
-                            <Button type="button" onClick={() => setQuestionCounter(questionCounter - 1)}>Pergunta Anterior</Button> : null
+                            <Button type="button" register={false} onClick={() => setQuestionCounter(questionCounter - 1)}>Pergunta Anterior</Button> : null
                         }
 
-                        <Button type="submit">{questionCounter != 10 ? 'Próxima Pergunta' : 'Cadastrar'}</Button>
+                        <Button type="button" register={false} onClick={handleRegisterQuestion}>Próxima Pergunta</Button>
                     </Buttons>
+
+                    <Button type="submit" disabled={questions.length < 3 ? true : false} register={true}>{questions.length < 3 ? 'Crie pelo menos 3 perguntas' : `Cadastrar quiz`}</Button>
 
                 </Form>
             </div>

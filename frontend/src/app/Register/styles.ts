@@ -39,6 +39,7 @@ export const Form = styled.form`
     label {
         font-size: 1.5em;
         margin-bottom: 0.3em;
+        text-align: center;
     }
     
     ::placeholder {
@@ -134,9 +135,9 @@ export const StyledLink = styled(Link)`
         transform: scale(0.9);
     }
 `
-export const Button = styled.button`
+export const Button = styled.button<{ register: boolean }>`
     margin-top: 5%;
-    font-size: 1.5em;
+    font-size: 1.3em;
     transition: .3s;
     background-color: #FACFCE;
     height: 1.5em;
@@ -148,10 +149,24 @@ export const Button = styled.button`
     border-radius: 10px;
     box-shadow: inset 0 0 0 0 black;
     cursor: pointer;
-    width: 50%;
+    width:${(props) => (props.register ? "100%" : "50%")};  
 
     @media (max-width: 600px) {  
         height: 2.5em;
+    }
+
+    :disabled{
+        background-color: red;
+        color: black;
+        border: 2px solid black;
+        cursor: not-allowed;
+    }
+
+    :disabled:hover{
+        background-color: red;
+        color: black;
+        border: 2px solid black;
+        cursor: not-allowed;
     }
 
 
