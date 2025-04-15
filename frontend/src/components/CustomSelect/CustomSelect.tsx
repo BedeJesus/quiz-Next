@@ -3,15 +3,16 @@ import { useState } from 'react';
 import { CustomSelect, OptionList, Option, Container, StyledLink } from './styles';
 
 interface SelectProps {
-    groups: string[];               
-    selectedGroup: string;          
-    onSelect: (value: string) => void;  
+    quizzes: string[];
+    selectedQuiz: string;
+    onSelect: (value: string) => void;
 }
 
-export default function Select( { groups , selectedGroup, onSelect }: SelectProps ) {
+export default function Select({ quizzes, selectedQuiz, onSelect }: SelectProps) {
     const [isOpen, setIsOpen] = useState(false);
 
-    function handleSelectChange(value:string) {
+
+    function handleSelectChange(value: string) {
         onSelect(value);
         setIsOpen(false);
     };
@@ -19,16 +20,16 @@ export default function Select( { groups , selectedGroup, onSelect }: SelectProp
     return (
         <Container>
             <CustomSelect onClick={() => setIsOpen(!isOpen)}>
-                {selectedGroup || "Selecione um Quiz"}
+                {selectedQuiz || "Selecione um Quiz"}
             </CustomSelect>
             <OptionList open={isOpen}>
-                {groups.map((group, index) => (
-                    <StyledLink key={index} href={`/Quiz/${encodeURIComponent(group)}`} passHref>
-                        <Option key={index} onClick={() => handleSelectChange(group)}>
-                            {group}
+                {quizzes ? quizzes.map((name, index) => (
+                    <StyledLink key={index} href={`/Quiz/${encodeURIComponent(name)}`} passHref>
+                        <Option key={index} onClick={() => handleSelectChange(name)}>
+                            {name}
                         </Option>
                     </StyledLink>
-                ))}
+                )) : <></>}
             </OptionList>
         </Container>
     );

@@ -9,15 +9,27 @@ datasource db {
 
 model Question {
   id            String   @id @default(uuid())
-  group         String
   title         String   @unique
   firstAnswer   String
   secondAnswer  String
   thirdAnswer   String
   fourthAnswer  String
   correctAnswer Int
+  quizId        String
+  quiz          Quiz     @relation(fields: [quizId], references: [id])
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
   @@map("questions")
+}
+
+model Quiz {
+  id             String     @id @default(uuid())
+  name           String
+  questionNumber Int
+  questions      Question[]
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  @@map("quizzes")
 }

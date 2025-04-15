@@ -7,6 +7,7 @@ import { ToastContainer, toast, Bounce } from 'react-toastify'
 
 interface Props {
     questions: QuestionInterface[]
+    quizName: string
 }
 
 export default function QuizClient({ questions }: Props) {
@@ -36,6 +37,7 @@ export default function QuizClient({ questions }: Props) {
         if (score <= 6) return 'Ok Ok, está bom!'
         if (score <= 8) return 'Mandou bem!'
         return 'Parabéns!!!'
+        // mudar essa parte para ficar dinamico, baseado em porcentagem de acertos
     }
 
     return (
@@ -44,7 +46,7 @@ export default function QuizClient({ questions }: Props) {
             <ToastContainer />
 
             <div className="question">
-                {questions.length === 10 && count <= 9 && (
+                {count <= questions.length-1 && (
                     <>
                         <Question>Questão {count + 1}</Question>
                         <Form onSubmit={handleSubmit}>
@@ -73,15 +75,13 @@ export default function QuizClient({ questions }: Props) {
                                 {count > 0 && (
                                     <Button type="button" onClick={() => setCount(count - 1)}> Anterior </Button>
                                 )}
-                                <Button type="submit">{count !== 9 ? 'Próxima' : 'Responder'}</Button>
+                                <Button type="submit">{count !== questions.length-1 ? 'Próxima' : 'Responder'}</Button>
                             </Buttons>
                         </Form>
                     </>
                 )}
 
-                {questions.length < 10 && <p>Carregando perguntas...</p>}
-
-                {count === 10 && (
+                {count === questions.length && (
                     <Result>
                         <h1>O seu resultado foi...</h1>
                         <h1>{score} {score === 1 ? 'ponto' : 'pontos'}!</h1>

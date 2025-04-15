@@ -42,13 +42,9 @@ export default function Register() {
 
     async function registerQuestions(questions: Question[], e: React.FormEvent) {
         e.preventDefault();
-        const questionsWithGroup = questions.map(question => ({
-            ...question,
-            group: group,
-        }));
 
         toast.promise(
-            api.post('questions/create', questionsWithGroup),
+            api.post('questions/create', {questions, name: group}),
             {
                 pending: 'Criando Quiz...',
                 success: 'Quiz criado com sucesso!',
@@ -125,8 +121,8 @@ export default function Register() {
                     </div>
 
                     <Buttons>
-                        {questionCounter > 1 ?
-                            <Button type="button" register={false} onClick={() => setQuestionCounter(questionCounter - 1)}>Pergunta Anterior</Button> : null
+                        {questionCounter > 1 &&
+                            <Button type="button" register={false} onClick={() => setQuestionCounter(questionCounter - 1)}>Pergunta Anterior</Button>
                         }
 
                         <Button type="button" register={false} onClick={handleRegisterQuestion}>Próxima Pergunta</Button>

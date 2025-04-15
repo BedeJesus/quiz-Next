@@ -4,15 +4,11 @@ import { useEffect, useState } from 'react';
 import api from '@/utils/api';
 import Select from '@/components/CustomSelect/CustomSelect';
 
-interface Group {
-    id: string;
-    name: string;
-}
 
 export default function SelectQuiz() {
 
-    const [groups, setGroups] = useState<Group[]>([]);
-    const [selectedGroup, setSelectedGroup] = useState<string>('');
+    const [quizzes, setQuizzes] = useState([]);
+    const [selectedQuiz, setSelectedQuiz] = useState<string>('');
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     useEffect(() => {
@@ -20,9 +16,9 @@ export default function SelectQuiz() {
     }, []);
 
     async function getQuizOptions(): Promise<void> {
-        const data = await api.get<{groups: Group[]}>('questions/getQuizOptions')
+        const data = await api.get('questions/getQuizOptions')
             .then((response) => {
-                setGroups(response.data.groups)
+                setQuizzes(response.data.quizzes)
 
             })
             .catch((err) => {
@@ -33,8 +29,7 @@ export default function SelectQuiz() {
     }
 
     function handleSelectChange(value: string): void {
-        console.log("Valor selecionado:", value);
-        setSelectedGroup(value);
+        setSelectedQuiz(value);
         setIsOpen(false);
     }
 
@@ -49,7 +44,7 @@ export default function SelectQuiz() {
 
                 <div className="buttons">
                     <StyledLink href={`/Quiz/${encodeURIComponent('random')}`} passHref>Perguntas Aleatórias</StyledLink>
-                    <Select groups={groups} selectedGroup={selectedGroup} onSelect={handleSelectChange} />
+                    <Select quizzes={quizzes} selectedQuiz={selectedQuiz} onSelect={handleSelectChange} />
                 </div>
             </>
 

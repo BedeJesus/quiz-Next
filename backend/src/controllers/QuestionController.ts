@@ -5,30 +5,31 @@ const prisma = new PrismaClient()
 export interface Question {
     group: string;
     title: string;
-    first_answer: string;
-    second_answer: string;
-    third_answer: string;
-    fourth_answer: string;
-    correct_answer: number;
+    firstAnswer: string;
+    secondAnswer: string;
+    thirdAnswer: string;
+    fourthAnswer: string;
+    correctAnswer: number;
 }
 
 
 export default class QuestionController {
 
     static async create(req: Request, res: Response) {
-        const questions: Question[] = req.body;
+        const questions: Question[] = req.body.questions;
+        const { name } = req.body;
 
         try {
 
             for (const question of questions) {
+
                 if (!question.title) return res.status(422).json({ message: "Faltando título" });
-                if (!question.first_answer) return res.status(422).json({ message: "Faltando primeira resposta" });
-                if (!question.second_answer) return res.status(422).json({ message: "Faltando segunda resposta" });
-                if (!question.third_answer) return res.status(422).json({ message: "Faltando terceira resposta" });
-                if (!question.fourth_answer) return res.status(422).json({ message: "Faltando quarta resposta" });
-                if (question.correct_answer == null) return res.status(422).json({ message: "Faltando resposta correta" });
-                if (question.correct_answer < 1 || question.correct_answer > 4) return res.status(422).json({ message: "Resposta correta deve ser entre 1 e 4" });
-                if (!question.group) return res.status(422).json({ message: "Faltando grupo" });    
+                if (!question.firstAnswer) return res.status(422).json({ message: "Faltando primeira resposta" });
+                if (!question.secondAnswer) return res.status(422).json({ message: "Faltando segunda resposta" });
+                if (!question.thirdAnswer) return res.status(422).json({ message: "Faltando terceira resposta" });
+                if (!question.fourthAnswer) return res.status(422).json({ message: "Faltando quarta resposta" });
+                if (question.correctAnswer == null) return res.status(422).json({ message: "Faltando resposta correta" });
+                if (question.correctAnswer < 1 || question.correctAnswer > 4) return res.status(422).json({ message: "Resposta correta deve ser entre 1 e 4" });
 
                 const existingQuestion = await prisma.question.findFirst({
                     where: { title: question.title }
@@ -38,19 +39,36 @@ export default class QuestionController {
 
             }
 
-            const savedQuestions = await prisma.question.createMany({
-                data: questions.map((question) => ({
-                    group: question.group,
-                    title: question.title,
-                    firstAnswer: question.first_answer,  
-                    secondAnswer: question.second_answer,
-                    thirdAnswer: question.third_answer,
-                    fourthAnswer: question.fourth_answer,
-                    correctAnswer: question.correct_answer
-                }))
-            });  
+            if (!name) return res.status(422).json({ message: "Faltando nome do quiz" });
 
-            return res.status(201).json({ message: 'Questões cadastradas com sucesso!', savedQuestions });
+            const existingQuiz = await prisma.quiz.findFirst({
+                where: { name }
+            });
+
+            if (existingQuiz) return res.status(409).json({ message: "Já existe um quiz com esse nome" });
+
+
+            const questionNumber = questions.length;
+
+            const quiz = await prisma.quiz.create({
+                data: {
+                    name,
+                    questionNumber,
+                    questions: {
+                        create: questions.map((q: any) => ({
+                            group: q.group,
+                            title: q.title,
+                            firstAnswer: q.firstAnswer,
+                            secondAnswer: q.secondAnswer,
+                            thirdAnswer: q.thirdAnswer,
+                            fourthAnswer: q.fourthAnswer,
+                            correctAnswer: q.correctAnswer
+                        }))
+                    }
+                },
+            });
+
+            return res.status(201).json({ message: 'Quiz cadastrado com sucesso!', quiz });
 
         } catch (err) {
             return res.status(500).json({ message: "Erro no servidor", error: err });
@@ -69,28 +87,30 @@ export default class QuestionController {
     }
 
     static async getTen(req: Request, res: Response) {
-        let group = req.params.group ? req.params.group : false
-        
-        const questions = group ? await prisma.question.findMany({
-            where: { group },
-            take: 10
+        let name = req.params.name ? req.params.name : false
+
+        const questions = name ? await prisma.quiz.findMany({
+            where: { name },
         }) : await prisma.question.findMany({
-            take: 10
+            take: 5
         });
         res.status(200).json({
-            questions: questions
+            quiz: {
+                questions: questions,
+                name: name ? name : "Aleatório"
+            }
         })
     }
 
     static async getQuizOptions(req: Request, res: Response) {
         try {
-            let groupsResult  = await prisma.question.findMany({
-                select: { group: true },
-                distinct: ['group']
+            let quizzesResult = await prisma.quiz.findMany({
+                select: { name: true },
+                distinct: ['name']
             });
 
-            let groups = groupsResult.map(g => g.group);
-            res.status(200).json({ groups });
+            let quizzes = quizzesResult.map(g => g.name);
+            res.status(200).json({ quizzes });
         } catch (err) {
             res.status(500).json({ message: "Erro ao buscar os grupos", error: err });
         }
