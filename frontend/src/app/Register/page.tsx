@@ -96,16 +96,12 @@ export default function Register() {
                     <label>Questão {questionCounter}:</label>
                     <Input type="text" placeholder="Digite sua questão" name='title' value={question.title || ""} onChange={handleOnChange} />
 
-                    {/* <label>Primeira resposta:</label> */}
                     <Input type="text" placeholder="Digite a primeira resposta" name='firstAnswer' value={question.firstAnswer || ""} onChange={handleOnChange} />
 
-                    {/* <label>Segunda resposta:</label> */}
                     <Input type="text" placeholder="Digite a segunda resposta" name='secondAnswer' value={question.secondAnswer || ""} onChange={handleOnChange} />
 
-                    {/* <label>Terceira resposta:</label> */}
                     <Input type="text" placeholder="Digite a terceira resposta" name='thirdAnswer' value={question.thirdAnswer || ""} onChange={handleOnChange} />
 
-                    {/* <label>Quarta resposta:</label> */}
                     <Input type="text" placeholder="Digite a quarta resposta" name='fourthAnswer' value={question.fourthAnswer || ""} onChange={handleOnChange} />
 
                     <label>Qual é a resposta correta?</label>
