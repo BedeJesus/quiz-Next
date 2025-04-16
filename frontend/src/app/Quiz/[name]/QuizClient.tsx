@@ -32,12 +32,13 @@ export default function QuizClient({ questions }: Props) {
     }
 
     function Message() {
-        if (score <= 2) return 'Vamos fingir que não aconteceu...'
-        if (score <= 4) return 'Vamos melhorar!'
-        if (score <= 6) return 'Ok Ok, está bom!'
-        if (score <= 8) return 'Mandou bem!'
-        return 'Parabéns!!!'
-        // mudar essa parte para ficar dinamico, baseado em porcentagem de acertos
+        const percentage = (score / questions.length) * 100;
+    
+        if (percentage < 30) return 'Vamos fingir que não aconteceu...';
+        if (percentage < 50) return 'Vamos melhorar!';
+        if (percentage < 70) return 'Ok Ok, está bom!';
+        if (percentage < 90) return 'Mandou bem!';
+        return 'Parabéns!!!';
     }
 
     return (
@@ -46,7 +47,7 @@ export default function QuizClient({ questions }: Props) {
             <ToastContainer />
 
             <div className="question">
-                {count <= questions.length-1 && (
+                {count <= questions.length - 1 && (
                     <>
                         <Question>Questão {count + 1}</Question>
                         <Form onSubmit={handleSubmit}>
@@ -75,7 +76,7 @@ export default function QuizClient({ questions }: Props) {
                                 {count > 0 && (
                                     <Button type="button" onClick={() => setCount(count - 1)}> Anterior </Button>
                                 )}
-                                <Button type="submit">{count !== questions.length-1 ? 'Próxima' : 'Responder'}</Button>
+                                <Button type="submit">{count !== questions.length - 1 ? 'Próxima' : 'Responder'}</Button>
                             </Buttons>
                         </Form>
                     </>
