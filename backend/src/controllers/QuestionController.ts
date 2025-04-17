@@ -77,9 +77,7 @@ export default class QuestionController {
 
 
     static async getAll(req: Request, res: Response) {
-        const questions = await prisma.question.findMany({
-            orderBy: { createdAt: 'desc' }
-        });
+        const questions = await prisma.question.findMany({});
 
         res.status(200).json({
             questions: questions
