@@ -33,7 +33,7 @@ export default function QuizClient({ questions }: Props) {
 
     function Message() {
         const percentage = (score / questions.length) * 100;
-    
+
         if (percentage < 30) return 'Vamos fingir que não aconteceu...';
         if (percentage < 50) return 'Vamos melhorar!';
         if (percentage < 70) return 'Ok Ok, está bom!';
@@ -47,6 +47,7 @@ export default function QuizClient({ questions }: Props) {
             <ToastContainer />
 
             <div className="question">
+
                 {count <= questions.length - 1 && (
                     <>
                         <Question>Questão {count + 1}</Question>
@@ -83,11 +84,13 @@ export default function QuizClient({ questions }: Props) {
                 )}
 
                 {count === questions.length && (
+
                     <Result>
                         <h1>O seu resultado foi...</h1>
                         <h1>{score} {score === 1 ? 'ponto' : 'pontos'}!</h1>
                         <h2>{Message()}</h2>
                     </Result>
+                    
                 )}
             </div>
         </Container>

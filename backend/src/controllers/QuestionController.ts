@@ -107,6 +107,8 @@ export default class QuestionController {
                 distinct: ['name']
             });
 
+            console.log('1')
+
             let quizzes = quizzesResult.map(g => g.name);
             res.status(200).json({ quizzes });
         } catch (err) {

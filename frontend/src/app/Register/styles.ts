@@ -2,6 +2,10 @@
 import styled from "styled-components";
 import Link from 'next/link'
 
+interface ButtonProps {
+    register?: boolean
+  }
+
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -135,7 +139,9 @@ export const StyledLink = styled(Link)`
         transform: scale(0.9);
     }
 `
-export const Button = styled.button<{ register: boolean }>`
+export const Button = styled.button.withConfig({
+    shouldForwardProp: (prop) => prop !== 'register'
+  })<ButtonProps>`
     margin-top: 5%;
     font-size: 1.3em;
     transition: .3s;
