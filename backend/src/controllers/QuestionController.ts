@@ -36,7 +36,6 @@ export default class QuestionController {
                 });
 
                 if (existingQuestion) return res.status(422).json({ message: "Essa questão já existe" });
-
             }
 
             if (!name) return res.status(422).json({ message: "Faltando nome do quiz" });
@@ -46,7 +45,6 @@ export default class QuestionController {
             });
 
             if (existingQuiz) return res.status(409).json({ message: "Já existe um quiz com esse nome" });
-
 
             const questionNumber = questions.length;
 
@@ -92,6 +90,7 @@ export default class QuestionController {
         }) : await prisma.question.findMany({
             take: 5
         });
+
         res.status(200).json({
             quiz: {
                 questions: questions,
@@ -106,8 +105,6 @@ export default class QuestionController {
                 select: { name: true },
                 distinct: ['name']
             });
-
-            console.log('1')
 
             let quizzes = quizzesResult.map(g => g.name);
             res.status(200).json({ quizzes });

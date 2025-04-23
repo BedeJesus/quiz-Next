@@ -31,20 +31,20 @@ export default function Register() {
 
     function handleRegisterQuestion(e?: React.FormEvent) {
         if (e) e.preventDefault();
-    
+
         const newQuestions = [...questions];
         newQuestions[questionCounter - 1] = question;
-    
+
         setQuestions(newQuestions);
         setQuestionCounter(questionCounter + 1);
     }
-    
+
 
     async function registerQuestions(questions: Question[], e: React.FormEvent) {
         e.preventDefault();
 
         toast.promise(
-            api.post('questions/create', {questions, name: group}),
+            api.post('questions/create', { questions, name: group }),
             {
                 pending: 'Criando Quiz...',
                 success: 'Quiz criado com sucesso!',

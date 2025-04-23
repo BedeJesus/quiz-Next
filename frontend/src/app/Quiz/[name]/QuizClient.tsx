@@ -90,7 +90,7 @@ export default function QuizClient({ questions }: Props) {
                         <h1>{score} {score === 1 ? 'ponto' : 'pontos'}!</h1>
                         <h2>{Message()}</h2>
                     </Result>
-                    
+
                 )}
             </div>
         </Container>

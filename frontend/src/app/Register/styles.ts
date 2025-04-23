@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 interface ButtonProps {
     register?: boolean
-  }
+}
 
 export const Container = styled.div`
     display: flex;
@@ -141,7 +141,7 @@ export const StyledLink = styled(Link)`
 `
 export const Button = styled.button.withConfig({
     shouldForwardProp: (prop) => prop !== 'register'
-  })<ButtonProps>`
+}) <ButtonProps>`
     margin-top: 5%;
     font-size: 1.3em;
     transition: .3s;

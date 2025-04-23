@@ -24,7 +24,7 @@ a:hover {
     color: #FACFCE;
 
 }
-`  
+`
 export const BackToMenu = styled(Link)`
     position: absolute;
     top: 20px;
