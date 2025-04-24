@@ -43,8 +43,14 @@ export default function Register() {
     async function registerQuestions(questions: Question[], e: React.FormEvent) {
         e.preventDefault();
 
+        const newQuestions = [...questions, question];
+        newQuestions[questionCounter - 1] = question;
+        setQuestions(newQuestions);
+
+        debugger
+
         toast.promise(
-            api.post('questions/create', { questions, name: group }),
+            api.post('questions/create', { questions: newQuestions, name: group }),
             {
                 pending: 'Criando Quiz...',
                 success: 'Quiz criado com sucesso!',
@@ -70,6 +76,8 @@ export default function Register() {
             }
 
         );
+
+
     }
 
     function handleAnswerClick(value: number): void {
@@ -86,19 +94,19 @@ export default function Register() {
 
             <div className="register">
 
-                <GroupName type="text" placeholder="Digite o título do Quiz" name='group' value={group} onChange={(e) => setGroup(e.target.value)} />
+                <GroupName type="text" required placeholder="Digite o título do Quiz" name='group' value={group} onChange={(e) => setGroup(e.target.value)} />
 
                 <Form onSubmit={(e) => registerQuestions(questions, e)}>
                     <label>Questão {questionCounter}:</label>
-                    <Input type="text" placeholder="Digite sua questão" name='title' value={question.title || ""} onChange={handleOnChange} />
+                    <Input type="text" required placeholder="Digite sua questão" name='title' value={question.title || ""} onChange={handleOnChange} />
 
-                    <Input type="text" placeholder="Digite a primeira resposta" name='firstAnswer' value={question.firstAnswer || ""} onChange={handleOnChange} />
+                    <Input type="text" required placeholder="Digite a primeira resposta" name='firstAnswer' value={question.firstAnswer || ""} onChange={handleOnChange} />
 
-                    <Input type="text" placeholder="Digite a segunda resposta" name='secondAnswer' value={question.secondAnswer || ""} onChange={handleOnChange} />
+                    <Input type="text" required placeholder="Digite a segunda resposta" name='secondAnswer' value={question.secondAnswer || ""} onChange={handleOnChange} />
 
-                    <Input type="text" placeholder="Digite a terceira resposta" name='thirdAnswer' value={question.thirdAnswer || ""} onChange={handleOnChange} />
+                    <Input type="text" required placeholder="Digite a terceira resposta" name='thirdAnswer' value={question.thirdAnswer || ""} onChange={handleOnChange} />
 
-                    <Input type="text" placeholder="Digite a quarta resposta" name='fourthAnswer' value={question.fourthAnswer || ""} onChange={handleOnChange} />
+                    <Input type="text" required placeholder="Digite a quarta resposta" name='fourthAnswer' value={question.fourthAnswer || ""} onChange={handleOnChange} />
 
                     <label>Qual é a resposta correta?</label>
 

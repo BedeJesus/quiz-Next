@@ -161,23 +161,12 @@ export const Button = styled.button.withConfig({
         height: 2.5em;
     }
 
-    :disabled{
-        background-color: red;
-        color: black;
-        border: 2px solid black;
+    &:disabled{
+        background-color: grey;
         cursor: not-allowed;
     }
-
-    :disabled:hover{
-        background-color: red;
-        color: black;
-        border: 2px solid black;
-        cursor: not-allowed;
-    }
-
 
     &:hover{
-        
         color: white;
         box-shadow: inset 0 -100px 0 0 black;
     }

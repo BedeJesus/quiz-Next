@@ -25,7 +25,7 @@ model Question {
 
 model Quiz {
   id             String     @id @default(uuid())
-  name           String
+  name           String     @unique
   questionNumber Int
   questions      Question[]
   createdAt      DateTime   @default(now())

@@ -10,9 +10,8 @@ export default async function QuizPage({ params }: Props) {
     const { name } = await params;
     const nameDecoded = decodeURIComponent(name)
     try {
-        const response = await api.get('/questions/ten', {
-            params: { name: nameDecoded }
-        });
+
+        const response = await api.get('/questions/ten', { params: { name: nameDecoded } });
 
         const quiz = response.data.quiz;
 

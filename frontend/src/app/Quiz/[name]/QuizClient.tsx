@@ -50,6 +50,7 @@ export default function QuizClient({ questions }: Props) {
 
                 {count <= questions.length - 1 && (
                     <>
+                   
                         <Question>Questão {count + 1}</Question>
                         <Form onSubmit={handleSubmit}>
                             <Title>{questions[count].title}</Title>
