@@ -119,15 +119,3 @@ export default class QuestionController {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-

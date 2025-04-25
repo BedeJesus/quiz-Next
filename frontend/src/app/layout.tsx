@@ -8,7 +8,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Quiz',
     description: 'Tela inicial do quiz',
-  }
+  },
+  icons: {
+    icon: "/favicon.ico",
+  shortcut: "/favicon.ico",
+  apple: "/favicon.ico",
+    },
 }
 
 
