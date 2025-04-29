@@ -29,7 +29,7 @@ export const CustomSelect = styled.div`
  }
 `;
 
-export const OptionList = styled.div<{open: boolean }>`
+export const OptionList = styled.div<{ open: boolean }>`
 
   position: absolute;
   background-color: transparent;
@@ -40,7 +40,18 @@ export const OptionList = styled.div<{open: boolean }>`
   border: 2px solid black;
   border-radius: 10px;
   transition: ease-out 0.2s;
-  
+  max-height: 15em;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 10px;
+  }
 
 
 `;
