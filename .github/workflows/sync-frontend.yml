@@ -1,0 +1,30 @@
+name: Sync frontend para outro repo
+
+on:
+  push:
+    paths:
+      - 'frontend/**'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código original
+        uses: actions/checkout@v3
+
+      - name: Sincronizar pasta frontend para repositório externo
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          mkdir temp-repo
+          cp -r frontend/* temp-repo/
+
+          cd temp-repo
+          git init
+          git remote add origin https://x-access-token:${{ secrets.DESTINO_TOKEN }}@github.com/BedeJesus/quiz-frontend.git
+          git checkout -b main
+          git add .
+          git commit -m "Atualização automática a partir do quiz-Next"
+          git push --force origin main
