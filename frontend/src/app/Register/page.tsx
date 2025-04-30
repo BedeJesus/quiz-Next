@@ -63,7 +63,7 @@ export default function Register() {
                     },
                 }
             },
-            {
+            { 
                 position: "top-center",
                 autoClose: 4000,
                 hideProgressBar: true,
