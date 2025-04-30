@@ -62,7 +62,7 @@ export default function Register() {
                         return 'Erro ao criar o quiz!'
                     },
                 }
-            },
+            }, 
             { 
                 position: "top-center",
                 autoClose: 4000,
