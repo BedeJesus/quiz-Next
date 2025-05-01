@@ -7,7 +7,7 @@ import QuestionRoutes from "./routes/QuestionRoutes";
 app.use(express.json())
 
 //Solving the cors problem
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
+app.use(cors({ credentials: true, origin: process.env.FRONTEND_URL }))
 
 //Routes
 

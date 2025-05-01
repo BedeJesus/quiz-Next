@@ -38,7 +38,6 @@ export default class QuestionController {
             
                 if (existingQuestion) return res.status(422).json({ message: `A pergunta ${i + 1} já existe` });
             }
-            
 
             if (!name) return res.status(422).json({ message: "Faltando nome do quiz" });
 
@@ -55,7 +54,7 @@ export default class QuestionController {
                     name,
                     questionNumber,
                     questions: {
-                        create: questions.map((q: any) => ({
+                        create: questions.map((q: Question) => ({
                             group: q.group,
                             title: q.title,
                             firstAnswer: q.firstAnswer,
@@ -74,7 +73,6 @@ export default class QuestionController {
             return res.status(500).json({ message: "Erro no servidor", error: err });
         }
     }
-
 
     static async getAll(req: Request, res: Response) {
         const questions = await prisma.question.findMany({});
