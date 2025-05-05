@@ -23,7 +23,7 @@ export default class QuestionController {
 
             for (let i = 0; i < questions.length; i++) {
                 const question = questions[i];
-            
+
                 if (!question.title) return res.status(422).json({ message: `Faltando título da pergunta ${i + 1}` });
                 if (!question.firstAnswer) return res.status(422).json({ message: `Faltando primeira resposta da pergunta ${i + 1}` });
                 if (!question.secondAnswer) return res.status(422).json({ message: `Faltando segunda resposta da pergunta ${i + 1}` });
@@ -31,11 +31,11 @@ export default class QuestionController {
                 if (!question.fourthAnswer) return res.status(422).json({ message: `Faltando quarta resposta da pergunta ${i + 1}` });
                 if (question.correctAnswer == null) return res.status(422).json({ message: `Faltando resposta correta da pergunta ${i + 1}` });
                 if (question.correctAnswer < 1 || question.correctAnswer > 4) return res.status(422).json({ message: `Resposta correta da pergunta ${i + 1} deve ser entre 1 e 4` });
-            
+
                 const existingQuestion = await prisma.question.findFirst({
                     where: { title: question.title }
                 });
-            
+
                 if (existingQuestion) return res.status(422).json({ message: `A pergunta ${i + 1} já existe` });
             }
 
