@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Container, StyledLink, Form, Button, Question, Answers, Title, Buttons, ButtonsRadio, Result } from './styles'
 import { Question as QuestionInterface } from '../../../interfaces/interfaces'
-import { ToastContainer, toast, Bounce } from 'react-toastify'
+import { ToastContainer} from 'react-toastify'
 
 interface Props {
     questions: QuestionInterface[]
