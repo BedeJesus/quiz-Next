@@ -43,7 +43,7 @@ export default function SelectQuiz() {
                 <h1>Selecione o modo de jogo</h1>
 
                 <div className="buttons">
-                    <StyledLink href={`/Quiz/${encodeURIComponent('random')}`} passHref>Perguntas Aleatórias</StyledLink>
+                    <StyledLink href={`/quiz/${encodeURIComponent('random')}`} passHref>Perguntas Aleatórias</StyledLink>
                     <Select quizzes={quizzes} selectedQuiz={selectedQuiz} onSelect={handleSelectChange} />
                 </div>
             </>

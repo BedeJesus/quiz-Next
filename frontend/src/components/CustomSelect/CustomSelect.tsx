@@ -24,7 +24,7 @@ export default function Select({ quizzes, selectedQuiz, onSelect }: SelectProps)
             </CustomSelect>
             <OptionList open={isOpen}>
                 {quizzes ? quizzes.map((name, index) => (
-                    <StyledLink key={index} href={`/Quiz/${encodeURIComponent(name)}`} passHref>
+                    <StyledLink key={index} href={`/quiz/${encodeURIComponent(name)}`} passHref>
                         <Option key={index} onClick={() => handleSelectChange(name)}>
                             {name}
                         </Option>
