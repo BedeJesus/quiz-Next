@@ -1,6 +1,7 @@
 import { Router } from "express";
 import QuestionController from "../controllers/QuestionController";
 
+
 const router = Router();
 
 router.post("/create", QuestionController.create);

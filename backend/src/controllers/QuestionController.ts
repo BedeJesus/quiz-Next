@@ -24,28 +24,28 @@ export default class QuestionController {
             for (let i = 0; i < questions.length; i++) {
                 const question = questions[i];
 
-                if (!question.title) return res.status(422).json({ message: `Faltando título da pergunta ${i + 1}` });
-                if (!question.firstAnswer) return res.status(422).json({ message: `Faltando primeira resposta da pergunta ${i + 1}` });
-                if (!question.secondAnswer) return res.status(422).json({ message: `Faltando segunda resposta da pergunta ${i + 1}` });
-                if (!question.thirdAnswer) return res.status(422).json({ message: `Faltando terceira resposta da pergunta ${i + 1}` });
-                if (!question.fourthAnswer) return res.status(422).json({ message: `Faltando quarta resposta da pergunta ${i + 1}` });
-                if (question.correctAnswer == null) return res.status(422).json({ message: `Faltando resposta correta da pergunta ${i + 1}` });
-                if (question.correctAnswer < 1 || question.correctAnswer > 4) return res.status(422).json({ message: `Resposta correta da pergunta ${i + 1} deve ser entre 1 e 4` });
+                if (!question.title) res.status(422).json({ message: `Faltando título da pergunta ${i + 1}` });
+                if (!question.firstAnswer) res.status(422).json({ message: `Faltando primeira resposta da pergunta ${i + 1}` });
+                if (!question.secondAnswer) res.status(422).json({ message: `Faltando segunda resposta da pergunta ${i + 1}` });
+                if (!question.thirdAnswer) res.status(422).json({ message: `Faltando terceira resposta da pergunta ${i + 1}` });
+                if (!question.fourthAnswer) res.status(422).json({ message: `Faltando quarta resposta da pergunta ${i + 1}` });
+                if (question.correctAnswer == null) res.status(422).json({ message: `Faltando resposta correta da pergunta ${i + 1}` });
+                if (question.correctAnswer < 1 || question.correctAnswer > 4) res.status(422).json({ message: `Resposta correta da pergunta ${i + 1} deve ser entre 1 e 4` });
 
                 const existingQuestion = await prisma.question.findFirst({
                     where: { title: question.title }
                 });
 
-                if (existingQuestion) return res.status(422).json({ message: `A pergunta ${i + 1} já existe` });
+                if (existingQuestion) res.status(422).json({ message: `A pergunta ${i + 1} já existe` });
             }
 
-            if (!name) return res.status(422).json({ message: "Faltando nome do quiz" });
+            if (!name) res.status(422).json({ message: "Faltando nome do quiz" });
 
             const existingQuiz = await prisma.quiz.findFirst({
                 where: { name }
             });
 
-            if (existingQuiz) return res.status(409).json({ message: "Já existe um quiz com esse nome" });
+            if (existingQuiz) res.status(409).json({ message: "Já existe um quiz com esse nome" });
 
             const questionNumber = questions.length;
 
@@ -67,10 +67,10 @@ export default class QuestionController {
                 },
             });
 
-            return res.status(201).json({ message: 'Quiz cadastrado com sucesso!', quiz });
+            res.status(201).json({ message: 'Quiz cadastrado com sucesso!', quiz });
 
         } catch (err) {
-            return res.status(500).json({ message: "Erro no servidor", error: err });
+            res.status(500).json({ message: "Erro no servidor", error: err });
         }
     }
 
@@ -80,6 +80,7 @@ export default class QuestionController {
         res.status(200).json({
             questions: questions
         })
+        
     }
 
     static async getTen(req: Request, res: Response) {
