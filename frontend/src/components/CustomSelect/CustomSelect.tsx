@@ -19,8 +19,8 @@ export default function Select({ quizzes, selectedQuiz, onSelect }: SelectProps)
 
     return (
         <Container>
-            <CustomSelect onClick={() => setIsOpen(!isOpen)}>
-                {selectedQuiz || "Selecione um Quiz"}
+            <CustomSelect onClick={() => setIsOpen(!isOpen)} >
+                {quizzes.length === 0 ? "Carregando..." : selectedQuiz || "Selecione um Quiz"}
             </CustomSelect>
             <OptionList open={isOpen}>
                 {quizzes ? quizzes.map((name, index) => (

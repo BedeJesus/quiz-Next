@@ -3,6 +3,7 @@ import { Container, StyledLink, BackToMenu } from './styles'
 import { useEffect, useState } from 'react';
 import api from '@/utils/api';
 import Select from '@/components/CustomSelect/CustomSelect';
+import { setTimeout } from 'timers/promises';
 
 
 export default function SelectQuiz() {
@@ -25,7 +26,6 @@ export default function SelectQuiz() {
                 alert('erro ao buscar os quizzes')
                 console.log(err)
             })
-
     }
 
     function handleSelectChange(value: string): void {
