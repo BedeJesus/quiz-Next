@@ -1,4 +1,4 @@
-<h1>Customer Connection</h1>
+<h1>Quiz</h1>
 👨‍💻 Aplicação web full-stack onde os usuários podem cadastrar e jogar quizzes de outros jogadores.<br>
 🤏🏽 Aplicação totalmente responsiva.<br>
 🚪 Acesse aqui: https://quiz-frontend-three-rose.vercel.app/
