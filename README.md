@@ -6,11 +6,11 @@
 <h2>Tecnologias Utilizadas</h2>
     <h3>Front-end</h3>
     - Next JS <br>
-    - Styled Components
+    - Styled Components <br>
     - Typescript
     <h3>Back-end</h3>
     - Node JS com Express como framework<br>
-    - Typescript
-    - Postgres como banco de dados e Prisma como ORM 
+    - Typescript <br>
+    - Postgres como banco de dados e Prisma como ORM <br>
     - Docker <p></p>
     
