@@ -1,12 +1,46 @@
 import { render, screen } from '@testing-library/react'
 import Page from './page'
-import '@testing-library/jest-dom'
+import userEvent from '@testing-library/user-event'
 
 describe('Register', () => {
 
   it('renders correctly', () => {
     render(<Page/>)
     expect(screen.getByPlaceholderText('Digite sua questão')).toBeInTheDocument()
+  })
+
+  it('allows to create a question', async () => {
+    render(<Page/>)
+    const user = userEvent.setup()
+
+    const questionInput = screen.getByPlaceholderText('Digite sua questão') 
+    await user.type(questionInput, 'Qual é a capital do Brasil?')
+    expect(questionInput).toHaveValue('Qual é a capital do Brasil?')
+
+    const firstAnswerInput = screen.getByPlaceholderText('Digite a primeira resposta')
+    await user.type(firstAnswerInput, 'São Paulo')
+    expect(firstAnswerInput).toHaveValue('São Paulo')
+
+    const secondAnswerInput = screen.getByPlaceholderText('Digite a segunda resposta')
+    await user.type(secondAnswerInput, 'Rio de Janeiro')
+    expect(secondAnswerInput).toHaveValue('Rio de Janeiro')
+
+    const thirdAnswerInput = screen.getByPlaceholderText('Digite a terceira resposta')
+    await user.type(thirdAnswerInput, 'Brasília')
+    expect(thirdAnswerInput).toHaveValue('Brasília')
+
+    const forthAnswerInput = screen.getByPlaceholderText('Digite a quarta resposta')
+    await user.type(forthAnswerInput, 'Salvador')
+    expect(forthAnswerInput).toHaveValue('Salvador')
+
+    const correctAnswerInput = screen.getByRole('button', { name: '3' })
+    await user.click(correctAnswerInput)
+    
+    const nextQuestionButton = screen.getByRole('button', { name: 'Próxima Pergunta' })
+    await user.click(nextQuestionButton)
+
+    expect(screen.getByText('Questão 2:')).toBeInTheDocument()
+
   })
 
 })
