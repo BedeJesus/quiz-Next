@@ -39,7 +39,6 @@ export default function Register() {
         setQuestionCounter(questionCounter + 1);
     }
 
-
     async function registerQuestions(questions: Question[], e: React.FormEvent) {
         e.preventDefault();
 
@@ -60,8 +59,8 @@ export default function Register() {
                         return 'Erro ao criar o quiz!'
                     },
                 }
-            }, 
-            { 
+            },
+            {
                 position: "top-center",
                 autoClose: 4000,
                 hideProgressBar: true,
@@ -75,7 +74,6 @@ export default function Register() {
 
         );
 
-
     }
 
     function handleAnswerClick(value: number): void {
@@ -88,7 +86,6 @@ export default function Register() {
             <StyledLink href='/'>Voltar</StyledLink>
 
             <ToastContainer />
-
 
             <div className="register">
 
@@ -134,7 +131,7 @@ export default function Register() {
                         <Button type="button" register={false} onClick={handleRegisterQuestion}>Próxima Pergunta</Button>
                     </Buttons>
 
-                    <Button type="submit" disabled={questions.length < 3 ? true : false} register={true}>{questions.length < 3 ? 'Crie pelo menos 3 perguntas' : `Cadastrar quiz`}</Button>
+                    <Button type="submit" disabled={questions.length < 4 ? true : false} register={true}>{questions.length < 4 ? 'Crie pelo menos 5 perguntas' : `Cadastrar quiz`}</Button>
 
                 </Form>
             </div>

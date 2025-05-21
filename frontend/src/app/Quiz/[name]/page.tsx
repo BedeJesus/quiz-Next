@@ -8,8 +8,8 @@ type PageProps = {
 
 export default async function QuizPage({ params }: PageProps) {
 
-    const { name } = await params; 
-    const nameDecoded = decodeURIComponent(name); 
+    const { name } = await params;
+    const nameDecoded = decodeURIComponent(name);
 
     try {
         const response = await api.get('/questions/ten', { params: { name: nameDecoded } });
