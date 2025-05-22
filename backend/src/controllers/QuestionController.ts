@@ -12,14 +12,11 @@ export interface Question {
     correctAnswer: number;
 }
 
-
 export default class QuestionController {
 
     static async create(req: Request, res: Response) {
         const questions: Question[] = req.body.questions;
         const { name } = req.body;
-
-        console.log("QUESTIONS", questions);
 
         try {
 
@@ -123,7 +120,7 @@ export default class QuestionController {
 
     }
 
-    static async getTen(req: Request, res: Response) {
+    static async getQuiz(req: Request, res: Response) {
         let name = req.query.name != "random" && typeof req.query.name === 'string' ? req.query.name : false;
 
         const quizResult = name ? await prisma.quiz.findUnique({
@@ -134,7 +131,6 @@ export default class QuestionController {
         const questions = quizResult?.questions || await prisma.question.findMany({
             take: 5
         });
-
         res.status(200).json({
             quiz: {
                 questions: questions,
