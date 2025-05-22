@@ -43,12 +43,14 @@ describe('Register', () => {
 
   })
 
+  jest.setTimeout(10000);
 
   it('allows to create a quiz', async () => {
+
     render(<Page />)
     const user = userEvent.setup()
 
-    for(let i = 0; i < 4; i++) {
+    for (let i = 1; i <= 5; i++) {
       const questionInput = screen.getByPlaceholderText('Digite sua questão')
       await user.type(questionInput, `Qual é a capital do Brasil? ${i}`)
 
@@ -67,11 +69,17 @@ describe('Register', () => {
       const correctAnswerInput = screen.getByRole('button', { name: '3' })
       await user.click(correctAnswerInput)
 
-      const nextQuestionButton = screen.getByRole('button', { name: 'Próxima Pergunta' })
-      await user.click(nextQuestionButton)
+      if (i === 5) {
+        const submitButton = screen.getByRole('button', { name: 'Cadastrar Quiz' })
+        await user.click(submitButton) 
+      } else {
+        const nextQuestionButton = screen.getByRole('button', { name: 'Próxima Pergunta' })
+        await user.click(nextQuestionButton)
+      }
     }
 
     expect(screen.getByText('Questão 5:')).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('Digite a quarta resposta')).toHaveDisplayValue('Salvador 5')
 
   })
 

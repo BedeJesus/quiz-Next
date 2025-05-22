@@ -19,33 +19,71 @@ export default class QuestionController {
         const questions: Question[] = req.body.questions;
         const { name } = req.body;
 
+        console.log("QUESTIONS", questions);
+
         try {
 
             for (let i = 0; i < questions.length; i++) {
                 const question = questions[i];
 
-                if (!question.title) res.status(422).json({ message: `Faltando título da pergunta ${i + 1}` });
-                if (!question.firstAnswer) res.status(422).json({ message: `Faltando primeira resposta da pergunta ${i + 1}` });
-                if (!question.secondAnswer) res.status(422).json({ message: `Faltando segunda resposta da pergunta ${i + 1}` });
-                if (!question.thirdAnswer) res.status(422).json({ message: `Faltando terceira resposta da pergunta ${i + 1}` });
-                if (!question.fourthAnswer) res.status(422).json({ message: `Faltando quarta resposta da pergunta ${i + 1}` });
-                if (question.correctAnswer == null) res.status(422).json({ message: `Faltando resposta correta da pergunta ${i + 1}` });
-                if (question.correctAnswer < 1 || question.correctAnswer > 4) res.status(422).json({ message: `Resposta correta da pergunta ${i + 1} deve ser entre 1 e 4` });
+                if (!question.title) {
+                    res.status(422).json({ message: `Faltando título da pergunta ${i + 1}` });
+                    return
+                }
+
+                if (!question.firstAnswer) {
+                    res.status(422).json({ message: `Faltando primeira resposta da pergunta ${i + 1}` });
+                    return
+                }
+
+                if (!question.secondAnswer) {
+                    res.status(422).json({ message: `Faltando segunda resposta da pergunta ${i + 1}` });
+                    return
+                }
+
+                if (!question.thirdAnswer) {
+                    res.status(422).json({ message: `Faltando terceira resposta da pergunta ${i + 1}` });
+                    return
+                }
+
+                if (!question.fourthAnswer) {
+                    res.status(422).json({ message: `Faltando quarta resposta da pergunta ${i + 1}` });
+                    return
+                }
+
+                if (question.correctAnswer == null) {
+                    res.status(422).json({ message: `Faltando resposta correta da pergunta ${i + 1}` });
+                    return
+                }
+
+                if (question.correctAnswer < 1 || question.correctAnswer > 4) {
+                    res.status(422).json({ message: `Resposta correta da pergunta ${i + 1} deve ser entre 1 e 4` });
+                    return
+                }
 
                 const existingQuestion = await prisma.question.findFirst({
                     where: { title: question.title }
                 });
 
-                if (existingQuestion) res.status(422).json({ message: `A pergunta ${i + 1} já existe` });
+                if (existingQuestion) {
+                    res.status(422).json({ message: `A pergunta ${i + 1} já existe` });
+                    return
+                }
             }
 
-            if (!name) res.status(422).json({ message: "Faltando nome do quiz" });
+            if (!name) {
+                res.status(422).json({ message: "Faltando nome do quiz" });
+                return
+            }
 
             const existingQuiz = await prisma.quiz.findFirst({
                 where: { name }
             });
 
-            if (existingQuiz) res.status(409).json({ message: "Já existe um quiz com esse nome" });
+            if (existingQuiz) {
+                res.status(422).json({ message: "Já existe um quiz com esse nome" });
+                return
+            }
 
             const questionNumber = questions.length;
 
@@ -68,9 +106,11 @@ export default class QuestionController {
             });
 
             res.status(201).json({ message: 'Quiz cadastrado com sucesso!', quiz });
+            return
 
         } catch (err) {
             res.status(500).json({ message: "Erro no servidor", error: err });
+            return
         }
     }
 
@@ -80,7 +120,7 @@ export default class QuestionController {
         res.status(200).json({
             questions: questions
         })
-        
+
     }
 
     static async getTen(req: Request, res: Response) {

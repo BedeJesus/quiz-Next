@@ -42,9 +42,9 @@ export default function Register() {
     async function registerQuestions(questions: Question[], e: React.FormEvent) {
         e.preventDefault();
 
-        const newQuestions = [...questions, question];
+        const newQuestions = [...questions];
         newQuestions[questionCounter - 1] = question;
-        setQuestions(newQuestions);
+        // setQuestions(newQuestions);
 
         toast.promise(
             api.post('questions/create', { questions: newQuestions, name: group }),
@@ -131,7 +131,7 @@ export default function Register() {
                         <Button type="button" register={false} onClick={handleRegisterQuestion}>Próxima Pergunta</Button>
                     </Buttons>
 
-                    <Button type="submit" disabled={questions.length < 4 ? true : false} register={true}>{questions.length < 4 ? 'Crie pelo menos 5 perguntas' : `Cadastrar quiz`}</Button>
+                    <Button type="submit" disabled={questions.length < 4 ? true : false} register={true}>{questions.length < 4 ? 'Crie pelo menos 5 perguntas' : `Cadastrar Quiz`}</Button>
 
                 </Form>
             </div>
