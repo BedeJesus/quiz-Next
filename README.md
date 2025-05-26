@@ -2,6 +2,7 @@
 👨‍💻 Aplicação web full-stack onde os usuários podem cadastrar e jogar quizzes de outros jogadores.<br>
 ❓ Cadastro mínimo de 5 questões por quiz.<br>
 💻 Front-end e back-end construidos em Typescript.<br>
+🧪 Testes automatizados feitos em Jest e Cypress
 🤏🏽 Aplicação totalmente responsiva.<br>
 🚪 Acesse aqui: https://quiz-frontend-three-rose.vercel.app/
 
