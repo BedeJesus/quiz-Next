@@ -24,7 +24,6 @@ export default function SelectQuiz() {
             })
             .catch((err) => {
                 alert('erro ao buscar os quizzes')
-                console.log(err)
             })
     }
 

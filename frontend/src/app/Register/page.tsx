@@ -44,7 +44,6 @@ export default function Register() {
 
         const newQuestions = [...questions];
         newQuestions[questionCounter - 1] = question;
-        // setQuestions(newQuestions);
 
         toast.promise(
             api.post('questions/create', { questions: newQuestions, name: group }),

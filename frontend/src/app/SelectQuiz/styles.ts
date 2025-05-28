@@ -126,12 +126,8 @@ export const Option = styled.option`
     border: solid 2px black;
     border-radius: 10px;
 
-
     &:hover{
         
         cursor: pointer;
     }
-
-
-    
 `

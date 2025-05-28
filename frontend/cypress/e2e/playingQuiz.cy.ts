@@ -15,7 +15,6 @@ describe('Testing creating and playing a quiz', () => {
         cy.get('h1').contains('O seu resultado foi...').should('be.visible')
     })
 
-
     it('should create and play a quiz correctly', () => {
         cy.visit('http://localhost:3000/Register')
 
@@ -59,6 +58,4 @@ describe('Testing creating and playing a quiz', () => {
         cy.get('h1').contains('O seu resultado foi...').should('be.visible')
 
     })
-
-
 })

@@ -117,7 +117,6 @@ export default class QuestionController {
         res.status(200).json({
             questions: questions
         })
-
     }
 
     static async getQuiz(req: Request, res: Response) {
@@ -152,5 +151,4 @@ export default class QuestionController {
             res.status(500).json({ message: "Erro ao buscar os grupos", error: err });
         }
     }
-
 }
