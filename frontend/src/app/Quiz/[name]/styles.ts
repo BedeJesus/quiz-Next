@@ -19,8 +19,7 @@ export const Container = styled.div`
 .question{
 
     @media (max-width: 600px) {  
-        /* background-color: blue; */
-        margin-top: 3em;
+        margin-top: 4em;
     }
 }
 `

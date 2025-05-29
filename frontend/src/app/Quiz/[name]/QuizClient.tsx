@@ -88,7 +88,7 @@ export default function QuizClient({ questions }: Props) {
 
                     <Result>
                         <h1>O seu resultado foi...</h1>
-                        <h1>{score} {score === 1 ? 'ponto' : 'pontos'}!</h1>
+                        <h1>{score} {score === 1 ? 'ponto' : 'pontos'} de {questions.length}!</h1>
                         <h2>{Message()}</h2>
                     </Result>
 

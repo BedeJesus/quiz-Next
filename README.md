@@ -2,7 +2,7 @@
 👨‍💻 Aplicação web full-stack onde os usuários podem cadastrar e jogar quizzes de outros jogadores.<br>
 ❓ Cadastro mínimo de 5 questões por quiz.<br>
 💻 Front-end e back-end construidos em Typescript.<br>
-🧪 Testes automatizados feitos em Jest e Cypress
+🧪 Testes automatizados feitos em Jest e Cypress.<br>
 🤏🏽 Aplicação totalmente responsiva.<br>
 🚪 Acesse aqui: https://quiz-frontend-three-rose.vercel.app/
 
@@ -15,3 +15,8 @@
     - Postgres como banco de dados e Prisma como ORM <br>
     - Docker <p></p>
     
+<h2>Jogando um Quiz</h2>  
+<img src ="for_readme/quiz.gif">
+
+<h2>Criando um Quiz</h2>  
+<img src ="for_readme/cadastro.gif">
