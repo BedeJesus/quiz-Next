@@ -127,9 +127,10 @@ export default class QuestionController {
             select: { questions: true }
         }) : null;
 
-        const questions = quizResult?.questions || await prisma.question.findMany({
-            take: 5
-        });
+        const questions = quizResult?.questions || (
+            await prisma.$queryRaw`SELECT * FROM "questions" ORDER BY RANDOM() LIMIT 5`
+        );
+
         res.status(200).json({
             quiz: {
                 questions: questions,
