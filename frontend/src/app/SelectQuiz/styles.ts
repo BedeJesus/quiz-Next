@@ -10,7 +10,7 @@ export const Container = styled.div`
     align-items: center;
 
 h1 {
-    font-size: 4em;
+    font-size: 3.5em;
     text-align: center;
 
     @media (max-width: 600px) {

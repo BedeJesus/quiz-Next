@@ -15,7 +15,8 @@ export const Container = styled.div`
 
     .register{
         @media (max-width: 600px) {  
-            margin-top: 11em;
+            margin-top: 8em;
+            padding-bottom: 1em;
         }
     }
 
